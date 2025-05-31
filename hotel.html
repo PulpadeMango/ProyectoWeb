@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle del hotel</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1 id="nombre-hotel">Cargando hotel...</h1>
+  </header>
+
+  <main>
+    <section class="detalle-hotel">
+      <img id="imagen-hotel" src="" alt="" style="width:100%; border-radius: 8px; max-height: 400px; object-fit: cover;">
+      <p id="descripcion-detallada">Cargando descripción...</p>
+      <p><strong>Ubicación:</strong> <span id="ubicacion-hotel"></span></p>
+      <p><strong>Precio:</strong> $<span id="precio-hotel"></span> USD</p>
+      
+      <hr>
+
+      <section id="reseñas">
+        <h3>Reseñas de usuarios</h3>
+        <div class="reseña">
+          <p><strong>Juan:</strong> Excelente servicio, volvería sin dudar. ⭐⭐⭐⭐</p>
+        </div>
+        <div class="reseña">
+          <p><strong>Laura:</strong> Muy limpio y bien ubicado. ⭐⭐⭐⭐⭐</p>
+        </div>
+      </section>
+
+      <hr>
+
+      <button id="btn-reservar">Reservar este hotel</button>
+    </section>
+  </main>
+
+  <script src="hotel.js"></script>
+</body>
+</html>
