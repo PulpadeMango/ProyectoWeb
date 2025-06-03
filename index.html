@@ -9,12 +9,16 @@
 <body>
 
   <header>
-    <h1>Hoteles la Residencia del Bien</h1>
-    <nav>
-      <a href="#">Inicio</a>
-      <a href="#">Ofertas</a>
-      <a href="#">Contacto</a>
-    </nav>
+    <div class="header-container">
+      <h1>Hoteles la Residencia del Bien</h1>
+      <nav>
+        <a href="#destacados">Destacados</a>
+        <a href="#ofertas">Ofertas</a>
+        <a href="#experiencias">Experiencias</a>
+        <a href="#contacto">Contacto</a>
+        <button id="btn-login">Iniciar sesión</button>
+      </nav>
+    </div>
   </header>
 
   <main>
@@ -25,15 +29,45 @@
       </div>
     </section>
 
-    <section id="info">
-      <h2>Nuestros hoteles destacados</h2>
-      <div id="lista-hoteles">
-        <!-- Aquí aparecerán los hoteles con JavaScript -->
+    <!-- Hoteles destacados -->
+    <section id="destacados" class="carrusel">
+      <h2>Hoteles destacados</h2>
+      <div class="carrusel-contenedor">
+        <button class="carrusel-btn prev" onclick="moverCarrusel('destacados', -1)">&#9664;</button>
+        <div class="carrusel-items" id="destacados-hoteles"></div>
+        <button class="carrusel-btn next" onclick="moverCarrusel('destacados', 1)">&#9654;</button>
+      </div>
+    </section>
+
+    <!-- Ofertas increíbles -->
+    <section id="ofertas" class="carrusel">
+      <h2>Ofertas increíbles</h2>
+      <div class="carrusel-contenedor">
+        <button class="carrusel-btn prev" onclick="moverCarrusel('ofertas', -1)">&#9664;</button>
+        <div class="carrusel-items" id="ofertas-hoteles"></div>
+        <button class="carrusel-btn next" onclick="moverCarrusel('ofertas', 1)">&#9654;</button>
+      </div>
+      <div class="ver-mas">
+        <a href="ofertas.html" class="ver-mas-boton">Ver más ofertas</a>
+      </div>
+    </section>
+
+    <!-- Nuevas experiencias -->
+    <section id="experiencias" class="carrusel">
+      <h2>Descubre nuevas experiencias</h2>
+      <div class="carrusel-contenedor">
+        <button class="carrusel-btn prev" onclick="moverCarrusel('experiencias', -1)">&#9664;</button>
+        <div class="carrusel-items" id="experiencias-hoteles"></div>
+        <button class="carrusel-btn next" onclick="moverCarrusel('experiencias', 1)">&#9654;</button>
       </div>
     </section>
   </main>
 
-  <footer>
+  <!-- Sección de contacto -->
+  <footer id="contacto">
+    <h3>Contacto</h3>
+    <p>Email: contacto@residenciadelbien.com</p>
+    <p>Teléfono: +52 123 456 7890</p>
     <p>&copy; 2025 Hoteles la Residencia del Bien. Todos los derechos reservados.</p>
   </footer>
 
