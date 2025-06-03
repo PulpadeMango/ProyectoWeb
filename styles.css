@@ -95,3 +95,31 @@ footer {
   transform: scale(1.01);
   transition: 0.2s ease;
 }
+
+/* Sección del buscador - armonizar con el diseño */
+#buscador {
+  background-color: transparent;
+  padding: 20px 0;
+  text-align: center;
+}
+
+#buscador .container {
+  display: inline-block;
+}
+
+#busqueda {
+  width: 300px;
+  max-width: 90%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
+}
+
+#busqueda:focus {
+  outline: none;
+  border-color: #0a9396;
+  box-shadow: 0px 2px 8px rgba(10,147,150,0.3);
+}
