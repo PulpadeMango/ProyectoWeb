@@ -33,5 +33,31 @@
   </main>
 
   <script src="hotel.js"></script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const reservarBtn = document.getElementById("btn-reservar");
+
+  if (reservarBtn) {
+    reservarBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      fetch("ver_sesion.php")
+        .then(res => res.json())
+        .then(data => {
+          if (data.autenticado) {
+            // Aquí iría la lógica para reservar
+            alert("Reserva confirmada (lógica futura)");
+          } else {
+            window.location.href = "login.php?redirigido=1";
+          }
+        })
+        .catch(() => {
+          alert("Error al verificar sesión.");
+        });
+    });
+  }
+});
+</script>
+
 </body>
 </html>
