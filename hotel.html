@@ -1,63 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Detalle del hotel</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Detalle del hotel</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1 id="nombre-hotel">Cargando hotel...</h1>
-  </header>
 
-  <main>
-    <section class="detalle-hotel">
-      <img id="imagen-hotel" src="" alt="" style="width:100%; border-radius: 8px; max-height: 400px; object-fit: cover;">
-      <p id="descripcion-detallada">Cargando descripción...</p>
-      <p><strong>Ubicación:</strong> <span id="ubicacion-hotel"></span></p>
-      <p><strong>Precio:</strong> $<span id="precio-hotel"></span> USD</p>
-      
-      <hr>
+  <header class="hotel-header"> <a href="index.html" class="back-button">
+        <i class="arrow-left">←</i>
+        Inicio
+    </a>
+    <h1 id="nombre-hotel">Cargando hotel...</h1>
+  </header>
 
-  
-    <h3>Servicios incluidos</h3>
-    <div id="servicios-hotel">Cargando...</div>
+  <main>
+    <section class="detalle-hotel">
+        <div class="hotel-visuals">
+            <img id="imagen-hotel" src="" alt="">
+            <p id="descripcion-detallada" class="descripcion-hotel"></p>
+        </div>
 
-    <h3>Reseñas de usuarios</h3>
-    <div id="reseñas">Cargando reseñas...</div>
+        <p><strong>Ubicación:</strong> <span id="ubicacion-hotel"></span></p>
+        <p><strong>Precio:</strong> $<span id="precio-hotel"></span> USD</p>
+      
+        <hr>
 
-      <hr>
+    <h3>Servicios incluidos</h3>
+    <div id="servicios-hotel">Cargando...</div>
 
-      <button id="btn-reservar">Reservar este hotel</button>
-    </section>
-  </main>
+    <h3>Reseñas de usuarios</h3>
+    <div id="reseñas">Cargando reseñas...</div>
 
-  <script src="hotel.js"></script>
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const reservarBtn = document.getElementById("btn-reservar");
+      <hr>
 
-  if (reservarBtn) {
-    reservarBtn.addEventListener("click", (e) => {
-      e.preventDefault();
+      <button id="btn-reservar">Reservar este hotel</button>
+    </section>
+  </main>
 
-      fetch("ver_sesion.php")
-        .then(res => res.json())
-        .then(data => {
-          if (data.autenticado) {
-            // Aquí iría la lógica para reservar
-            alert("Reserva confirmada (lógica futura)");
-          } else {
-            window.location.href = "login.php?redirigido=1";
-          }
-        })
-        .catch(() => {
-          alert("Error al verificar sesión.");
-        });
-    });
-  }
-});
-</script>
+  <script src="hotel.js"></script>
 
 </body>
 </html>

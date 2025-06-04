@@ -34,6 +34,46 @@ fetch("https://hotelesresidenciadelbien.alwaysdata.net/get_data.php")
   })
   .catch(error => console.error("Error al cargar hoteles:", error));
 
+
+// Función para verificar la sesión y actualizar la UI
+function verificarSesionYActualizarUI() {
+    fetch("ver_sesion.php")
+        .then(response => response.json())
+        .then(data => {
+            const authControls = document.getElementById("auth-controls");
+            if (authControls) {
+                if (data.autenticado) {
+                    // Usuario autenticado
+                    authControls.innerHTML = `
+                        <span class="user-info">
+                            <i class="user-icon">👤</i> <span>Hola, ${data.nombre}</span>
+                        </span>
+                        <a href="logout.php" class="logout-btn">Cerrar sesión</a>
+                    `;
+                } else {
+                    // Usuario no autenticado
+                    authControls.innerHTML = `
+                        <a href="login.php" class="login-btn">Iniciar sesión</a>
+                    `;
+                }
+            }
+        })
+        .catch(error => {
+            console.error("Error al verificar sesión:", error);
+            // Si hay un error, mostrar el botón de inicio de sesión por defecto
+            const authControls = document.getElementById("auth-controls");
+            if (authControls) {
+                authControls.innerHTML = `
+                    <a href="login.php" class="login-btn">Iniciar sesión</a>
+                `;
+            }
+        });
+}
+
+// Llama a la función al cargar la página y después de que todos los hoteles se carguen
+document.addEventListener("DOMContentLoaded", verificarSesionYActualizarUI);
+
+
 function mostrarHoteles(hoteles) {
   const contenedor = document.getElementById("lista-hoteles");
   if (!contenedor) return;

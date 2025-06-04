@@ -5,7 +5,7 @@ session_start();
 $host = 'mysql-hotelesresidenciadelbien.alwaysdata.net'; 
 $usuario = '415850_donovan';   
 $clave = '19Mi77do21ri';  
-$base_datos = 'hotelesresidenciadelbien_bd'; 
+$base_datos = 'hotelesresidenciadelbien_db'; 
 
 $conn = new mysqli($host, $usuario, $clave, $base_datos);
 if ($conn->connect_error) {
@@ -17,7 +17,7 @@ $correo = trim($_POST['correo']);
 $contrasena = $_POST['contrasena'];
 
 // Buscar usuario
-$sql = "SELECT id, nombre, contrasena FROM usuarios WHERE correo = ?";
+$sql = "SELECT id_usuario, nombre, contrasena FROM usuarios WHERE correo = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $correo);
 $stmt->execute();
