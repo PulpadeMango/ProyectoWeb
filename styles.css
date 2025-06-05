@@ -1,8 +1,8 @@
-/* Reseteo básico para eliminar márgenes y rellenos predeterminados de los navegadores */
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Esto es una buena práctica para el cálculo de anchos y alturas */
+    box-sizing: border-box; 
 }
 
 body {
@@ -21,6 +21,28 @@ header {
     flex-wrap: wrap; /* Permitir que los elementos salten de línea en pantallas pequeñas */
     min-height: 80px; /* Asegura un alto mínimo para el header */
 }
+
+/* Contenedor principal que se adapta a distintos tamaños */
+.contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Para pantallas muy grandes */
+@media screen and (min-width: 1800px) {
+  .contenedor {
+    max-width: 1600px;
+  }
+}
+
+/* Asegura que el contenido esté bien distribuido también en pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .hotel {
+    width: 100%; /* Los hoteles se apilan en pantallas pequeñas */
+  }
+}
+
 
 header h1 {
     font-size: 1.8em;
@@ -420,6 +442,19 @@ footer {
     padding: 0 15px; /* Pequeño padding para que el texto no se pegue a los bordes si el ancho es pequeño */
 }
 
+.descripcion-detallada {
+  margin-top: 25px;
+  font-size: 1.2em;
+  line-height: 1.7;
+  color: #333;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-left: 5px solid #0a9396;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+
 /* Estilos para el botón de reservar en hotel.html */
 #btn-reservar {
     display: block; /* Para que ocupe todo el ancho disponible si es necesario */
@@ -483,4 +518,26 @@ hr {
 
 #reseñas strong {
     color: #005f73;
+}
+
+main, header > nav, header > h1, footer, #contacto, .detalle-hotel {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Para pantallas MUY grandes (por ejemplo 4K) */
+@media screen and (min-width: 1800px) {
+    main, header > nav, header > h1, footer, #contacto, .detalle-hotel {
+        max-width: 1600px;
+    }
+}
+
+/* Para pantallas pequeñas: que los hoteles usen todo el ancho disponible */
+@media screen and (max-width: 768px) {
+    .hotel {
+        width: 100% !important;
+    }
 }

@@ -23,15 +23,24 @@ fetch("https://hotelesresidenciadelbien.alwaysdata.net/get_data.php") // Fetch t
     document.getElementById("imagen-hotel").src = hotel.imagen_url;
     document.getElementById("imagen-hotel").alt = `Imagen de ${hotel.nombre}`;
     document.getElementById("descripcion-detallada").textContent = hotel.descripcion;
+    // Mostrar descripción detallada (si existe)
+const descripcionDetalladaDiv = document.getElementById("descripcion-ampliada");
+if (hotel.descripcion_detallada) {
+  descripcionDetalladaDiv.textContent = hotel.descripcion_detallada;
+  descripcionDetalladaDiv.style.fontSize = "1.2em"; 
+} else {
+  descripcionDetalladaDiv.textContent = "No hay descripción ampliada disponible.";
+}
+
     document.getElementById("ubicacion-hotel").textContent = `${hotel.ciudad}, ${hotel.pais}`;
     document.getElementById("precio-hotel").textContent = hotel.precio;
 
     // --- Manejo de Servicios ---
     const serviciosDiv = document.getElementById("servicios-hotel");
     try {
-        // Asumiendo que hotel.servicios es un string JSON como '["Wifi", "Piscina"]'
-        // Si ya viene como un array (por ejemplo, en un entorno de desarrollo), quita JSON.parse
-        const servicios = JSON.parse(hotel.servicios || "[]"); // Parsea a array, si no existe, usa un array vacío
+        const servicios = (hotel.servicios || "").includes("[")
+  ? JSON.parse(hotel.servicios)
+  : hotel.servicios.split(',');
         if (servicios.length > 0) {
             const serviciosHTML = servicios.map(s => `<li>${s.trim()}</li>`).join('');
             serviciosDiv.innerHTML = `<ul>${serviciosHTML}</ul>`;
