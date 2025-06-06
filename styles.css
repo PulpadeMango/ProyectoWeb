@@ -1,54 +1,50 @@
-
+/* RESETEO BÁSICO */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
 }
 
+/* ESTILOS GLOBALES */
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f0f2f5;
+    line-height: 1.6; /* Mejora la legibilidad general */
+    color: #333; /* Color de texto por defecto */
 }
 
-/* --------- HEADER GENERAL (PARA index.html, ofertas.html) --------- */
+/* Contenedor principal para centrar contenido */
+.contenedor {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Para pantallas muy grandes */
+@media screen and (min-width: 1800px) {
+    .contenedor {
+        max-width: 1600px;
+    }
+}
+
+/* --------- HEADER GENERAL (PARA index.html, ofertas.html, rooms.html) --------- */
 header {
     background-color: #005f73;
     color: white;
     padding: 20px;
     display: flex;
-    justify-content: space-between; /* El título a la izquierda, la navegación a la derecha */
-    align-items: center; /* Alinear verticalmente los elementos */
-    flex-wrap: wrap; /* Permitir que los elementos salten de línea en pantallas pequeñas */
-    min-height: 80px; /* Asegura un alto mínimo para el header */
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 80px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para el header */
 }
-
-/* Contenedor principal que se adapta a distintos tamaños */
-.contenedor {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Para pantallas muy grandes */
-@media screen and (min-width: 1800px) {
-  .contenedor {
-    max-width: 1600px;
-  }
-}
-
-/* Asegura que el contenido esté bien distribuido también en pantallas pequeñas */
-@media screen and (max-width: 768px) {
-  .hotel {
-    width: 100%; /* Los hoteles se apilan en pantallas pequeñas */
-  }
-}
-
 
 header h1 {
     font-size: 1.8em;
     margin: 0;
-    flex-grow: 1; /* Permite que el h1 crezca y empuje la navegación a la derecha */
-    text-align: left; /* Alinea el título a la izquierda por defecto */
+    flex-grow: 1;
+    text-align: left;
 }
 
 header nav {
@@ -61,6 +57,12 @@ header nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    padding: 5px 10px; /* Añade un poco de padding para que sean más clickeables */
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #a8dadc; /* Un tono más claro al pasar el ratón */
 }
 
 /* El .login-btn original ahora solo se usa si el usuario NO está logueado */
@@ -71,54 +73,57 @@ header .login-btn {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none; /* Asegura que se vea como botón incluso si es un <a> */
+    text-decoration: none;
     font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 header .login-btn:hover {
     background-color: #00707b;
 }
 
-/* ----------- ESTILOS ESPECÍFICOS PARA EL HEADER DE HOTEL.HTML ----------- */
+/* ----------- ESTILOS ESPECÍFICOS PARA EL HEADER DE HOTEL.HTML y ROOMS.HTML ----------- */
 .hotel-header {
-    position: relative; /* Necesario para que `position: absolute` del botón funcione */
-    justify-content: center; /* Centra el h1 del hotel */
-    /* Aquí no necesitamos flex-grow para el h1, ya que el botón es absoluto y no lo empuja */
+    position: relative;
+    justify-content: center;
 }
 
 .hotel-header h1 {
-    text-align: center; /* Centra el título del hotel en hotel.html */
-    flex-grow: 0; /* Deshabilita flex-grow para que el h1 no interfiera con el botón */
+    text-align: center;
+    flex-grow: 0;
+    /* Ajuste para que el título no quede debajo del botón de regreso */
+    /* Eliminar padding-left/right si el botón es posicionado absoluto */
+    padding-left: 0; 
+    padding-right: 0; 
 }
 
-/* Estilos para el botón de regreso (APLICADO EN hotel.html) */
+/* Estilos para el botón de regreso (APLICADO EN hotel.html, rooms.html) */
 .back-button {
     display: flex;
     align-items: center;
-    gap: 8px; /* Espacio entre la flecha y el texto */
+    gap: 8px;
     color: white;
     text-decoration: none;
     font-weight: bold;
     padding: 10px 15px;
-    background-color: #0a9396; /* Un color similar al de otros botones */
+    background-color: #0a9396;
     border-radius: 5px;
-    position: absolute; /* Para posicionarlo libremente respecto a .hotel-header */
-    top: 20px; /* Distancia desde la parte superior */
-    left: 20px; /* Distancia desde la izquierda */
+    position: absolute;
+    top: 20px;
+    left: 20px;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    z-index: 1000;
 }
 
 .back-button:hover {
     background-color: #00707b;
-    transform: translateX(-3px); /* Pequeño efecto al pasar el ratón */
+    transform: translateX(-3px);
 }
 
 .arrow-left {
-    font-size: 1.5em; /* Tamaño de la flecha */
-    line-height: 1; /* Alineación vertical de la flecha */
+    font-size: 1.5em;
+    line-height: 1;
 }
-
 
 /* --------- BUSCADOR (DE index.html) --------- */
 #buscador .container {
@@ -127,7 +132,11 @@ header .login-btn:hover {
     gap: 15px;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 30px; /* Aumenta el margen superior para más espacio */
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 #buscador input,
@@ -138,6 +147,7 @@ header .login-btn:hover {
     font-size: 14px;
     min-width: 180px;
     max-width: 240px;
+    flex-grow: 1; /* Permite que los inputs se expandan */
 }
 
 #buscador button {
@@ -149,6 +159,7 @@ header .login-btn:hover {
     cursor: pointer;
     transition: background 0.2s;
     font-size: 14px;
+    font-weight: bold;
 }
 
 #buscador button:hover {
@@ -179,10 +190,10 @@ header .login-btn:hover {
 }
 
 .seccion-hoteles h2 {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     color: #333;
-    text-align: center; /* Asegura que los h2 de las secciones estén centrados */
-    margin-top: 40px; /* Ya estaba definido así, lo mantengo aquí para claridad */
+    text-align: center;
+    font-size: 2em;
 }
 
 .carrusel {
@@ -190,28 +201,37 @@ header .login-btn:hover {
     overflow-x: auto;
     scroll-behavior: smooth;
     gap: 20px;
-    margin-bottom: 10px;
+    padding-bottom: 10px; /* Espacio para la barra de desplazamiento si aparece */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .carrusel::-webkit-scrollbar {
-    display: none;
+    display: none; /* Oculta la barra de desplazamiento para navegadores basados en WebKit */
 }
 
 .hotel {
     flex: 0 0 auto;
-    width: 300px;
+    width: 300px; /* Ancho fijo para las tarjetas de hotel */
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 12px; /* Bordes más redondeados */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hotel:hover {
+    transform: translateY(-8px); /* Efecto de levantamiento al pasar el ratón */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 /* --------- IMÁGENES DE HOTEL (EN LISTADOS / OFERTAS) --------- */
 .imagen-hotel {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 9; /* Mantiene la proporción de imagen */
     overflow: hidden;
     border-radius: 8px;
+    margin-bottom: 10px;
 }
 
 .imagen-hotel img {
@@ -221,20 +241,36 @@ header .login-btn:hover {
     display: block;
 }
 
+.titulo-hotel {
+    font-size: 1.5em;
+    color: #005f73;
+    margin-bottom: 8px;
+}
+
+.hotel p {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 5px;
+}
+
 /* --------- BOTÓN VER MÁS --------- */
 .ver-mas {
-    margin-top: 15px;
+    margin-top: 25px; /* Aumenta el margen superior */
     display: inline-block;
     background-color: #005f73;
     color: white;
-    padding: 8px 20px;
+    padding: 10px 25px; /* Más padding */
     text-decoration: none;
-    border-radius: 20px;
+    border-radius: 25px; /* Más redondeado */
     transition: 0.3s ease;
+    font-weight: bold;
+    text-align: center;
 }
 
 .ver-mas:hover {
     background-color: #0a9396;
+    transform: translateY(-2px); /* Pequeño efecto */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* --------- FLECHAS DE CARRUSEL --------- */
@@ -242,34 +278,40 @@ header .login-btn:hover {
     background-color: #0a9396;
     color: white;
     border: none;
-    font-size: 24px;
-    padding: 10px 15px;
+    font-size: 28px; /* Más grande */
+    padding: 12px 18px; /* Más padding */
     border-radius: 50%;
     cursor: pointer;
     margin: 10px;
     transition: 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0; /* Evita que se encoja en flexbox */
 }
 
 .flecha-carrusel:hover {
     background-color: #00707b;
+    transform: scale(1.05);
 }
 
 /* --------- SECCIÓN DE CONTACTO / FOOTER --------- */
 #contacto {
     background-color: #003845;
     color: white;
-    padding: 30px 20px;
+    padding: 40px 20px; /* Más padding */
     text-align: center;
-    margin-top: 50px; /* Pequeño margen para separar del contenido */
+    margin-top: 50px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 #contacto h2 {
-    margin-bottom: 15px;
-    color: white; /* Asegura que el h2 del footer sea blanco */
+    margin-bottom: 20px;
+    color: white;
+    font-size: 2em;
 }
 
 #contacto p {
-    margin: 5px 0;
+    margin: 8px 0;
+    font-size: 1.1em;
 }
 
 footer {
@@ -278,34 +320,30 @@ footer {
     padding: 20px;
     text-align: center;
     margin-top: 30px;
+    font-size: 0.9em;
 }
 
 .enlace-hotel {
     display: block;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.enlace-hotel:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-}
 
-.grid-ofertas {
+.grid-ofertas, .grid-habitaciones { /* Aplicado a ambos grid */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     padding: 20px;
+    justify-content: center; /* Centra las tarjetas si no llenan la fila */
 }
 
 /* Centrar el contenedor del formulario (de login/registro) */
 .form-container {
-    max-width: 400px;
+    max-width: 450px; /* Un poco más ancho */
     margin: 80px auto;
     background-color: #ffffff;
-    padding: 30px;
+    padding: 40px; /* Más padding */
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -316,53 +354,90 @@ footer {
     flex-direction: column;
 }
 
+.form-container label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
 .form-container input {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
+    padding: 12px; /* Más padding */
+    margin-bottom: 20px; /* Más espacio */
+    border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.form-container input:focus {
+    outline: none;
+    border-color: #0a9396;
 }
 
 /* Botón del formulario */
 .form-container button {
-    padding: 10px;
+    padding: 12px;
     background-color: #0a9396;
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 1.1em;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
 }
 
 .form-container button:hover {
     background-color: #005f73;
+    transform: translateY(-2px);
 }
 
 /* Mensaje de error del formulario */
 .mensaje-error {
-    color: red;
+    color: #d62828; /* Rojo fuerte */
+    background-color: #ffe0e0; /* Fondo rojo claro */
+    border: 1px solid #d62828;
+    padding: 15px;
+    border-radius: 8px;
     text-align: center;
-    margin-top: 10px;
+    margin: 20px auto;
+    max-width: 600px;
+    font-weight: bold;
 }
 
-/* Enlace registro */
+.mensaje-info {
+    color: #005f73; /* Color primario */
+    background-color: #e0f2f7; /* Fondo azul claro */
+    border: 1px solid #005f73;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+/* Enlace registro / login */
 .form-container p {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
+    font-size: 0.95em;
 }
 
 .form-container a {
     color: #0a9396;
     text-decoration: none;
+    font-weight: bold;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
 }
 
 /* ----------- ESTILOS PARA USUARIO LOGUEADO (CABECERA) ----------- */
 #auth-controls {
     display: flex;
     align-items: center;
-    gap: 15px; /* Espacio entre elementos */
+    gap: 15px;
 }
 
 .user-info {
@@ -371,28 +446,22 @@ footer {
     gap: 5px;
     color: white;
     font-weight: bold;
-    white-space: nowrap; /* Evita que el nombre de usuario se rompa en varias líneas */
+    white-space: nowrap;
 }
 
 .user-icon {
-    font-size: 1.2em; /* Tamaño del icono */
-    /* Puedes usar una imagen aquí, por ejemplo:
-    background-image: url('ruta/a/tu/icono-usuario.png');
-    background-size: contain;
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    */
+    font-size: 1.2em;
+    /* Si tienes un icono SVG o font-awesome, úsalo aquí */
 }
 
 .logout-btn {
-    background-color: #d62828; /* Un color distinto para el botón de cerrar sesión */
+    background-color: #d62828;
     color: white;
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none; /* Asegura que se vea como botón */
+    text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
@@ -405,8 +474,8 @@ footer {
 
 /* Sección para el detalle del hotel */
 .detalle-hotel {
-    max-width: 900px; /* Ancho máximo para la sección de detalle */
-    margin: 30px auto; /* Centra la sección en la página */
+    max-width: 900px;
+    margin: 30px auto;
     background-color: white;
     padding: 30px;
     border-radius: 12px;
@@ -416,63 +485,42 @@ footer {
 /* Contenedor para la imagen y descripción que se centrará */
 .hotel-visuals {
     display: flex;
-    flex-direction: column; /* Coloca los elementos uno debajo del otro */
-    align-items: center; /* Centra horizontalmente los elementos hijos (imagen y descripción) */
-    margin-bottom: 20px; /* Espacio debajo de la imagen y descripción */
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 /* Estilos para la imagen del hotel en la página de detalle */
 #imagen-hotel {
-    width: 80%; /* O un ancho fijo, por ejemplo, 600px */
-    max-width: 600px; /* Asegura que no se haga demasiado grande */
-    height: auto; /* Mantiene la proporción de la imagen */
+    width: 80%;
+    max-width: 600px;
+    height: auto;
     border-radius: 8px;
-    object-fit: cover; /* Recorta la imagen para que cubra el espacio sin distorsionarse */
-    margin-bottom: 15px; /* Espacio entre la imagen y la descripción */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sutil sombra para la imagen */
+    object-fit: cover;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* Estilos para la descripción del hotel en la página de detalle */
 .descripcion-hotel {
-    text-align: center; /* Centra el texto de la descripción */
+    text-align: center;
     font-size: 1.1em;
     color: #555;
     line-height: 1.6;
-    margin-bottom: 20px; /* Espacio después de la descripción */
-    padding: 0 15px; /* Pequeño padding para que el texto no se pegue a los bordes si el ancho es pequeño */
+    margin-bottom: 20px;
+    padding: 0 15px;
 }
 
 .descripcion-detallada {
-  margin-top: 25px;
-  font-size: 1.2em;
-  line-height: 1.7;
-  color: #333;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-left: 5px solid #0a9396;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-
-/* Estilos para el botón de reservar en hotel.html */
-#btn-reservar {
-    display: block; /* Para que ocupe todo el ancho disponible si es necesario */
-    width: fit-content; /* Se ajusta al contenido */
-    margin: 30px auto 0 auto; /* Centra el botón y le da margen superior */
-    padding: 12px 25px;
-    background-color: #0a9396;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#btn-reservar:hover {
-    background-color: #00707b;
-    transform: translateY(-2px);
+    margin-top: 25px;
+    font-size: 1.2em;
+    line-height: 1.7;
+    color: #333;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-left: 5px solid #0a9396;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 /* Estilos para las HR (líneas divisorias) */
@@ -492,13 +540,13 @@ hr {
 
 /* Estilos para listas de servicios (si se usan <ul><li>) */
 #servicios-hotel ul {
-    list-style: none; /* Quita los puntos de la lista */
+    list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px; /* Espacio entre los elementos de la lista */
+    gap: 15px;
 }
 
 #servicios-hotel li {
@@ -520,64 +568,403 @@ hr {
     color: #005f73;
 }
 
-main, header > nav, header > h1, footer, #contacto, .detalle-hotel {
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
+/* Estilos para el nuevo botón de reserva (el que antes era #btn-reservar) */
+.btn-reservar-estilizado {
+    display: block;
+    width: fit-content;
+    margin: 30px auto 0 auto;
+    padding: 12px 25px;
+    background-color: #0a9396; /* Color primario */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none; /* Asegura que sea un enlace estéticamente como botón */
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(10, 147, 150, 0.3); /* Sombra suave */
 }
 
-/* Para pantallas MUY grandes (por ejemplo 4K) */
-@media screen and (min-width: 1800px) {
-    main, header > nav, header > h1, footer, #contacto, .detalle-hotel {
-        max-width: 1600px;
+.btn-reservar-estilizado:hover {
+    background-color: #00707b; /* Un tono más oscuro al pasar el ratón */
+    transform: translateY(-2px); /* Pequeño levantamiento */
+    box-shadow: 0 6px 15px rgba(10, 147, 150, 0.4); /* Sombra más pronunciada */
+}
+
+/* --- Nuevos estilos para las habitaciones en rooms.html --- */
+
+.habitacion-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.habitacion-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.imagen-habitacion {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.imagen-habitacion img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.info-habitacion {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.info-habitacion h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #005f73;
+    text-align: left;
+}
+
+.info-habitacion p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Estilo para el botón de reservar de la habitación individual */
+.btn-reserva-habitacion {
+    background-color: #0a9396;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: auto;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+}
+
+.btn-reserva-habitacion:hover {
+    background-color: #00707b;
+    transform: translateY(-2px);
+}
+
+
+/* RESPONSIVE DESIGN */
+@media screen and (max-width: 1024px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    header h1 {
+        margin-bottom: 15px;
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    header nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hotel-header {
+        /* Permite que el back-button quede arriba y el título centrado debajo */
+        flex-direction: column; 
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+    }
+
+    .hotel-header .back-button {
+        position: static; /* Quita el posicionamiento absoluto */
+        margin-bottom: 15px;
+        align-self: flex-start; /* Alinea a la izquierda dentro del flex container */
+        top: auto;
+        left: auto;
+    }
+
+    .hotel-header h1 {
+        text-align: center; /* Asegura que el título siga centrado */
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #buscador .container {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    #buscador input,
+    #buscador select,
+    #buscador button {
+        width: 100%;
+        max-width: 400px; /* Limita el ancho en móviles */
+    }
+
+    .grid-ofertas, .grid-habitaciones {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+        padding: 10px;
+    }
+
+    .hotel, .habitacion-card {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        max-width: 400px; /* Limita el ancho de las tarjetas */
+        margin: 0 auto; /* Centra las tarjetas */
+    }
+
+    .detalle-hotel {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    #imagen-hotel {
+        width: 95%;
+    }
+
+    .descripcion-hotel, .descripcion-detallada {
+        padding: 0 5px;
+        font-size: 1em;
+    }
+
+    .flecha-carrusel {
+        display: none; /* Oculta las flechas en pantallas pequeñas, se puede desplazar manualmente */
+    }
+
+    .carrusel {
+        justify-content: flex-start; /* Alinea al inicio si no hay flechas */
+        padding: 0 10px 10px; /* Ajusta el padding */
     }
 }
 
-/* Para pantallas pequeñas: que los hoteles usen todo el ancho disponible */
-@media screen and (max-width: 768px) {
-    .hotel {
-        width: 100% !important;
-    }
-}
 
+/* EASTER EGG STYLES */
 @keyframes sacudir {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(2deg); }
-  50% { transform: rotate(-2deg); }
-  75% { transform: rotate(1deg); }
-  100% { transform: rotate(0deg); }
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(2deg); }
+    50% { transform: rotate(-2deg); }
+    75% { transform: rotate(1deg); }
+    100% { transform: rotate(0deg); }
 }
 
 .sacudir {
-  animation: sacudir 0.5s ease-in-out;
+    animation: sacudir 0.5s ease-in-out;
 }
 
 .modo-oscuro {
-  background-color: #000 !important;
-  color: #fff !important;
+    background-color: #000 !important;
+    color: #fff !important;
 }
 
 .modo-oscuro header,
 .modo-oscuro footer,
 .modo-oscuro #contacto {
-  background-color: #111 !important;
+    background-color: #111 !important;
 }
 
 .modo-oscuro a {
-  color: #0ff !important;
+    color: #0ff !important;
 }
 
 .modo-oscuro .hotel,
-.modo-oscuro .detalle-hotel {
-  background-color: #1a1a1a !important;
-  color: #fff !important;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+.modo-oscuro .detalle-hotel,
+.modo-oscuro .form-container,
+.modo-oscuro .habitacion-card,
+.modo-oscuro .modal-content { /* Añadir modo oscuro para tarjetas de habitación, formularios y modal */
+    background-color: #1a1a1a !important;
+    color: #fff !important;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
+.modo-oscuro input {
+    background-color: #222 !important;
+    color: #fff !important;
+    border-color: #444 !important;
+}
+
+.modo-oscuro .descripcion-detallada {
+    background-color: #2a2a2a !important;
+    border-left-color: #0ff !important;
+}
+
+.modo-oscuro #servicios-hotel li {
+    background-color: #2a2a2a !important;
+    border-color: #444 !important;
+}
+
+.modo-oscuro .mensaje-error {
+    background-color: #4a0000 !important;
+    color: #ffaaaa !important;
+    border-color: #880000 !important;
+}
+
+.modo-oscuro .mensaje-info {
+    background-color: #00303a !important;
+    color: #a8dadc !important;
+    border-color: #005f73 !important;
+}
+
+.modo-oscuro .modal-message.mensaje-error {
+    background-color: #4a0000 !important;
+    color: #ffaaaa !important;
+    border-color: #880000 !important;
+}
+
+.modo-oscuro .modal-message.mensaje-info {
+    background-color: #00303a !important;
+    color: #a8dadc !important;
+    border-color: #005f73 !important;
+}
+
+
 .cambio-cursor {
-  cursor: url(https://cur.cursors-4u.net/games/gam-10/oth959.ani), 
-          url(https://cur.cursors-4u.net/games/gam-10/oth959.png), 
-          auto !important;
+    cursor: url(https://cur.cursors-4u.net/games/gam-10/oth959.ani), 
+             url(https://cur.cursors-4u.net/games/gam-10/oth959.png), 
+             auto !important;
+}
+
+/* --- Estilos para el Modal de Reserva --- */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Permanece en su lugar incluso al hacer scroll */
+    z-index: 1001; /* Z-index alto para que esté por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Habilitar scroll si el contenido es demasiado grande */
+    background-color: rgba(0,0,0,0.6); /* Fondo semi-transparente oscuro */
+    display: flex; /* Usar flexbox para centrar contenido */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* Centrar automáticamente */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 90%; /* Ancho adaptable */
+    max-width: 500px; /* Ancho máximo */
+    position: relative;
+    text-align: center;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    color: #005f73;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.modal-content p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.modal-content label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+    font-size: 1em;
+}
+
+.modal-content input[type="date"] {
+    width: calc(100% - 20px); /* Ancho completo menos padding */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Incluir padding en el ancho */
+}
+
+.modal-content button {
+    background-color: #0a9396;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+    width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+.modal-content button:hover {
+    background-color: #00707b;
+    transform: translateY(-2px);
+}
+
+.modal-message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal-message.mensaje-error {
+    color: #d62828;
+    background-color: #ffe0e0;
+    border: 1px solid #d62828;
+}
+
+.modal-message.mensaje-info {
+    color: #005f73;
+    background-color: #e0f2f7;
+    border: 1px solid #005f73;
+}
+
+/* Responsive para el modal */
+@media screen and (max-width: 600px) {
+    .modal-content {
+        padding: 20px;
+        width: 95%;
+    }
+    .modal-content h2 {
+        font-size: 1.5em;
+    }
+    .close-button {
+        font-size: 24px;
+        top: 10px;
+        right: 15px;
+    }
 }

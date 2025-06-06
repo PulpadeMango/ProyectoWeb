@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <title>Detalle del hotel</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header class="hotel-header"> <a href="index.html" class="back-button">
+  <header class="hotel-header">
+    <a href="index.html" class="back-button">
         <i class="arrow-left">←</i>
         Inicio
     </a>
@@ -17,15 +18,14 @@
 
   <main>
     <section class="detalle-hotel">
-        <div class="hotel-visuals">
-            <img id="imagen-hotel" src="" alt="">
-            <p id="descripcion-detallada" class="descripcion-hotel"></p>
-            <div id="descripcion-ampliada" class="descripcion-detallada" style="margin-top: 20px; line-height: 1.6;"></div>
-        </div>
+        <div class="hotel-visuals">
+            <img id="imagen-hotel" src="" alt="">
+            <p id="descripcion-detallada" class="descripcion-hotel"></p>
+            <div id="descripcion-ampliada" class="descripcion-detallada" style="margin-top: 20px; line-height: 1.6;"></div>
+        </div>
 
-        <p><strong>Ubicación:</strong> <span id="ubicacion-hotel"></span></p>
-        <p><strong>Precio:</strong> $<span id="precio-hotel"></span> USD</p>
-        <hr>
+        <p><strong>Ubicación:</strong> <span id="ubicacion-hotel"></span></p>
+        <p><strong>Precio promedio:</strong> $<span id="precio-hotel"></span> USD</p>         <hr>
 
     <h3>Servicios incluidos</h3>
     <div id="servicios-hotel">Cargando...</div>
@@ -35,7 +35,7 @@
 
       <hr>
 
-      <button id="btn-reservar">Reservar este hotel</button>
+            <a id="btn-ver-habitaciones" class="btn-reservar-estilizado">Ver Habitaciones Disponibles</a>
     </section>
   </main>
 
