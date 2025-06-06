@@ -189,3 +189,22 @@ function moverCarrusel(id, direccion) {
     behavior: "smooth"
   });
 }
+
+// Easter egg: reproducir audio al hacer clic en el título
+document.addEventListener("DOMContentLoaded", () => {
+  const titulo = document.getElementById("titulo-easter");
+  const audio = new Audio("audio-easteregg.mp3"); // Ruta del audio
+
+  titulo.style.cursor = "pointer"; // Cambia el cursor para que parezca clickeable
+
+  titulo.addEventListener("click", () => {
+    audio.play().catch(err => {
+      console.error("No se pudo reproducir el audio:", err);
+    });
+    titulo.classList.add("sacudir"); // Clase CSS animada
+    setTimeout(() => titulo.classList.remove("sacudir"), 1000);
+     document.body.classList.add("modo-oscuro");
+     document.body.classList.add("cambio-cursor");
+  });
+});
+

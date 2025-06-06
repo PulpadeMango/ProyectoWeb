@@ -541,3 +541,43 @@ main, header > nav, header > h1, footer, #contacto, .detalle-hotel {
         width: 100% !important;
     }
 }
+
+@keyframes sacudir {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.sacudir {
+  animation: sacudir 0.5s ease-in-out;
+}
+
+.modo-oscuro {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.modo-oscuro header,
+.modo-oscuro footer,
+.modo-oscuro #contacto {
+  background-color: #111 !important;
+}
+
+.modo-oscuro a {
+  color: #0ff !important;
+}
+
+.modo-oscuro .hotel,
+.modo-oscuro .detalle-hotel {
+  background-color: #1a1a1a !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.cambio-cursor {
+  cursor: url(https://cur.cursors-4u.net/games/gam-10/oth959.ani), 
+          url(https://cur.cursors-4u.net/games/gam-10/oth959.png), 
+          auto !important;
+}
