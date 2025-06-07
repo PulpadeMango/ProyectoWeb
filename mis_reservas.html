@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Reservas</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <h1>Mis Reservas</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="ofertas.html">Ofertas</a>
+      <a href="mis_reservas.html">Mis Reservas</a>
+      <div id="auth-controls">
+        <a href="login.php" class="login-btn">Iniciar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="contenedor">
+    <section>
+      <h2>Reservaciones actuales</h2>
+      <div id="reservas-container" class="grid-ofertas">
+        <p>Cargando reservas...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Hoteles la Residencia del Bien. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script> <!-- Verificación de sesión -->
+  <script src="mis_reservas.js"></script> <!-- Carga y control de reservas -->
+</body>
+</html>

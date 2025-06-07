@@ -1,78 +1,106 @@
 let todosLosHoteles = [];
+let modoMalActivo = false;
 
-fetch("https://hotelesresidenciadelbien.alwaysdata.net/get_data.php")
-  .then(res => res.json())
-  .then(hoteles => {
-    todosLosHoteles = hoteles;
+document.addEventListener("DOMContentLoaded", () => {
+  const titulo = document.getElementById("titulo-easter");
+  const audio = new Audio("audio-easteregg.mp3");
 
-    document.getElementById("busqueda").addEventListener("keydown", function(e) {
-      if (e.key === "Enter") filtrarHoteles();
-    });
+  // Hacer el título clickeable
+  titulo.style.cursor = "pointer";
 
-    llenarFiltroPais(hoteles);
+  titulo.addEventListener("click", () => {
+    if (!modoMalActivo) {
+      modoMalActivo = true;
 
-    hoteles.forEach(hotel => {
-      try {
-        const reseñas = JSON.parse(hotel.reseñas || "[]");
-        const totalEstrellas = reseñas.reduce((acc, r) => acc + r.estrellas, 0);
-        hotel.calificacion = reseñas.length ? totalEstrellas / reseñas.length : 0;
-      } catch (e) {
-        hotel.calificacion = 0;
+      audio.play().catch(err => console.error("No se pudo reproducir el audio:", err));
+      titulo.classList.add("sacudir");
+      setTimeout(() => titulo.classList.remove("sacudir"), 1000);
+
+      document.body.classList.add("modo-oscuro", "cambio-cursor");
+      document.getElementById("titulo-easter").textContent = "Resident Evil";
+
+      // Cargar tabla alternativa
+      fetch("https://hotelesresidenciadelbien.alwaysdata.net/get_data.php?tabla=hoteles_del_mal")
+        .then(res => res.json())
+        .then(hotelesMal => {
+          todosLosHoteles = hotelesMal;
+          mostrarHoteles(hotelesMal);
+
+          const destacados = [...hotelesMal].sort((a, b) => b.precio - a.precio).slice(0, 5);
+          renderCarrusel(destacados, "carrusel-destacados");
+
+          const ofertas = [...hotelesMal].sort((a, b) => a.precio - b.precio).slice(0, 5);
+          renderCarrusel(ofertas, "carrusel-ofertas");
+
+          const aleatorios = hotelesMal.sort(() => 0.5 - Math.random()).slice(0, 5);
+          renderCarrusel(aleatorios, "carrusel-experiencias");
+        })
+        .catch(err => console.error("Error al cargar hoteles del mal:", err));
+    }
+  });
+
+  verificarSesionYActualizarUI();
+
+  // Cargar hoteles normales por defecto
+  fetch("https://hotelesresidenciadelbien.alwaysdata.net/get_data.php")
+    .then(res => res.json())
+    .then(hoteles => {
+      todosLosHoteles = hoteles;
+
+      document.getElementById("busqueda").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") filtrarHoteles();
+      });
+
+      llenarFiltroPais(hoteles);
+
+      hoteles.forEach(hotel => {
+        try {
+          const reseñas = JSON.parse(hotel.reseñas || "[]");
+          const totalEstrellas = reseñas.reduce((acc, r) => acc + r.estrellas, 0);
+          hotel.calificacion = reseñas.length ? totalEstrellas / reseñas.length : 0;
+        } catch (e) {
+          hotel.calificacion = 0;
+        }
+      });
+
+      mostrarHoteles(hoteles);
+
+      const destacados = [...hoteles].sort((a, b) => b.calificacion - a.calificacion).slice(0, 5);
+      renderCarrusel(destacados, "carrusel-destacados");
+
+      const ofertas = [...hoteles].sort((a, b) => a.precio - b.precio).slice(0, 5);
+      renderCarrusel(ofertas, "carrusel-ofertas");
+
+      const aleatorios = hoteles.sort(() => 0.5 - Math.random()).slice(0, 5);
+      renderCarrusel(aleatorios, "carrusel-experiencias");
+    })
+    .catch(error => console.error("Error al cargar hoteles:", error));
+});
+
+function verificarSesionYActualizarUI() {
+  fetch("ver_sesion.php")
+    .then(response => response.json())
+    .then(data => {
+      const authControls = document.getElementById("auth-controls");
+      if (authControls) {
+        authControls.innerHTML = data.autenticado
+          ? `
+            <span class="user-info">
+              <i class="user-icon">👤</i> <span>Hola, ${data.nombre}</span>
+            </span>
+            <a href="logout.php" class="logout-btn">Cerrar sesión</a>
+          `
+          : `<a href="login.php" class="login-btn">Iniciar sesión</a>`;
+      }
+    })
+    .catch(error => {
+      console.error("Error al verificar sesión:", error);
+      const authControls = document.getElementById("auth-controls");
+      if (authControls) {
+        authControls.innerHTML = `<a href="login.php" class="login-btn">Iniciar sesión</a>`;
       }
     });
-
-    mostrarHoteles(hoteles);
-
-    const destacados = [...hoteles].sort((a, b) => b.calificacion - a.calificacion).slice(0, 5);
-    renderCarrusel(destacados, "carrusel-destacados");
-
-    const ofertas = [...hoteles].sort((a, b) => a.precio - b.precio).slice(0, 5);
-    renderCarrusel(ofertas, "carrusel-ofertas");
-
-    const aleatorios = hoteles.sort(() => 0.5 - Math.random()).slice(0, 5);
-    renderCarrusel(aleatorios, "carrusel-experiencias");
-  })
-  .catch(error => console.error("Error al cargar hoteles:", error));
-
-
-// Función para verificar la sesión y actualizar la UI
-function verificarSesionYActualizarUI() {
-    fetch("ver_sesion.php")
-        .then(response => response.json())
-        .then(data => {
-            const authControls = document.getElementById("auth-controls");
-            if (authControls) {
-                if (data.autenticado) {
-                    // Usuario autenticado
-                    authControls.innerHTML = `
-                        <span class="user-info">
-                            <i class="user-icon">👤</i> <span>Hola, ${data.nombre}</span>
-                        </span>
-                        <a href="logout.php" class="logout-btn">Cerrar sesión</a>
-                    `;
-                } else {
-                    // Usuario no autenticado
-                    authControls.innerHTML = `
-                        <a href="login.php" class="login-btn">Iniciar sesión</a>
-                    `;
-                }
-            }
-        })
-        .catch(error => {
-            console.error("Error al verificar sesión:", error);
-            // Si hay un error, mostrar el botón de inicio de sesión por defecto
-            const authControls = document.getElementById("auth-controls");
-            if (authControls) {
-                authControls.innerHTML = `
-                    <a href="login.php" class="login-btn">Iniciar sesión</a>
-                `;
-            }
-        });
 }
-
-// Llama a la función al cargar la página y después de que todos los hoteles se carguen
-document.addEventListener("DOMContentLoaded", verificarSesionYActualizarUI);
-
 
 function mostrarHoteles(hoteles) {
   const contenedor = document.getElementById("lista-hoteles");
@@ -82,8 +110,11 @@ function mostrarHoteles(hoteles) {
   hoteles.forEach(hotel => {
     const div = document.createElement("div");
     div.classList.add("hotel");
+
+    const tablaParam = modoMalActivo ? "&tabla=hoteles_del_mal" : "";
+
     div.innerHTML = `
-      <a href="hotel.html?id=${hotel.id}" class="enlace-hotel">
+      <a href="hotel.html?id=${hotel.id}${tablaParam}" class="enlace-hotel">
         <div class="imagen-hotel">
           <img src="${hotel.imagen_url}" alt="Imagen de ${hotel.nombre}">
         </div>
@@ -114,13 +145,15 @@ function filtrarHoteles() {
   const contenedor = document.getElementById("lista-hoteles");
   contenedor.innerHTML = "";
 
+  const tablaParam = modoMalActivo ? "&tabla=hoteles_del_mal" : "";
+
   if (resultados.length > 0) {
     seccion.style.display = "block";
     resultados.forEach(hotel => {
       const div = document.createElement("div");
       div.classList.add("hotel");
       div.innerHTML = `
-        <a href="hotel.html?id=${hotel.id}" class="enlace-hotel">
+        <a href="hotel.html?id=${hotel.id}${tablaParam}" class="enlace-hotel">
           <div class="imagen-hotel">
             <img src="${hotel.imagen_url}" alt="Imagen de ${hotel.nombre}">
           </div>
@@ -137,7 +170,6 @@ function filtrarHoteles() {
     contenedor.innerHTML = `<p style="text-align:center; color:#666;">No se encontraron hoteles que coincidan con la búsqueda.</p>`;
   }
 }
-
 
 function reiniciarFiltros() {
   document.getElementById("busqueda").value = "";
@@ -163,18 +195,21 @@ function renderCarrusel(lista, idContenedor) {
   const contenedor = document.getElementById(idContenedor);
   if (!contenedor) return;
   contenedor.innerHTML = "";
+
+  const tablaParam = modoMalActivo ? "&tabla=hoteles_del_mal" : "";
+
   lista.forEach(hotel => {
     const div = document.createElement("div");
     div.classList.add("hotel");
     div.innerHTML = `
-      <a href="hotel.html?id=${hotel.id}" class="enlace-hotel">
+      <a href="hotel.html?id=${hotel.id}${tablaParam}" class="enlace-hotel">
         <div class="imagen-hotel">
           <img src="${hotel.imagen_url}" alt="Imagen de ${hotel.nombre}">
         </div>
         <h3>${hotel.nombre}</h3>
         <p><strong>${hotel.ciudad}, ${hotel.pais}</strong></p>
         <p>💵 $${hotel.precio} USD</p>
-        <p>⭐ ${hotel.calificacion.toFixed(1)} / 5</p>
+        <p>⭐ ${hotel.calificacion?.toFixed(1) || "0.0"} / 5</p>
       </a>
     `;
     contenedor.appendChild(div);
@@ -189,22 +224,3 @@ function moverCarrusel(id, direccion) {
     behavior: "smooth"
   });
 }
-
-// Easter egg: reproducir audio al hacer clic en el título
-document.addEventListener("DOMContentLoaded", () => {
-  const titulo = document.getElementById("titulo-easter");
-  const audio = new Audio("audio-easteregg.mp3"); // Ruta del audio
-
-  titulo.style.cursor = "pointer"; // Cambia el cursor para que parezca clickeable
-
-  titulo.addEventListener("click", () => {
-    audio.play().catch(err => {
-      console.error("No se pudo reproducir el audio:", err);
-    });
-    titulo.classList.add("sacudir"); // Clase CSS animada
-    setTimeout(() => titulo.classList.remove("sacudir"), 1000);
-     document.body.classList.add("modo-oscuro");
-     document.body.classList.add("cambio-cursor");
-  });
-});
-

@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="favicon.png?v=1">
   <title>Hoteles La Residencia del Bien</title>
   <link rel="stylesheet" href="styles.css">
@@ -14,8 +15,11 @@
     <nav>
       <a href="#">Inicio</a>
       <a href="ofertas.html">Ofertas</a>
-      <a href="#">Contacto</a>
+      <a href="mis_reservas.html">Ver mis Reservas</a>
       <div id="auth-controls">
+      <p>
+        <a href="mis_reservas.html" class="btn-ver-reservas">Ver mis reservas</a>
+      </p>  
         <a href="login.php" class="login-btn">Iniciar sesión</a>
       </div>
     </nav>
@@ -36,7 +40,7 @@
     </section>
 
     <section id="resultados" style="display: none;" class="seccion-hoteles">
-        <h2>🔎 Resultados de búsqueda</h2>
+      <h2>🔎 Resultados de búsqueda</h2>
       <div id="lista-hoteles" class="grid-ofertas"></div>
     </section>
 

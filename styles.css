@@ -968,3 +968,207 @@ hr {
         right: 15px;
     }
 }
+
+.btn-ver-reservas {
+    background-color: #0a9396;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-ver-reservas:hover {
+    background-color: #00707b;
+}
+
+.estado-reserva {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.estado-pendiente {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.estado-confirmada {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.estado-cancelada {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* Botones para actualizar estado */
+.botones-estado {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.boton-accion {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.boton-accion.confirmar { background-color: #16a34a; color: white; }
+.boton-accion.completar { background-color: #0f766e; color: white; }
+.boton-accion.cancelar  { background-color: #b91c1c; color: white; }
+
+.boton-accion:hover {
+  opacity: 0.9;
+}
+
+/* --- NUEVOS ESTILOS PARA LA SECCIÓN 'MIS RESERVAS' Y BOTONES --- */
+
+/* Ajustes para la tarjeta de reserva en mis_reservas.html */
+/* Estas propiedades ya existen en tu .hotel, pero aseguran flexbox para la estructura de la tarjeta de reserva */
+.hotel {
+    display: flex; /* Para organizar imagen y texto en columna */
+    flex-direction: column;
+    height: auto; /* Altura automática basada en el contenido */
+    overflow: hidden; /* Asegura que la imagen no se desborde si es más grande */
+}
+
+/* Contenedor para la imagen de la reserva */
+.imagen-reserva {
+    width: 100%; /* Ocupa todo el ancho de la tarjeta */
+    height: 200px; /* Altura fija para uniformidad de las imágenes */
+    overflow: hidden; /* Esconde cualquier parte de la imagen que se desborde */
+    border-bottom: 1px solid #eee; /* Línea sutil para separar la imagen del texto */
+}
+
+/* Estilos para la imagen dentro de la tarjeta de reserva */
+.imagen-reserva img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+    display: block; /* Elimina el espacio extra que algunos navegadores añaden a las imágenes */
+}
+
+/* Contenedor para la información de la reserva (texto, precios, botones) */
+.info-reserva {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que esta sección ocupe el espacio restante */
+}
+
+/* Estilo para el precio total a pagar */
+.total-pago {
+    font-weight: bold;
+    color: #d62828; /* Un color rojo distintivo para el total, puedes cambiarlo */
+    font-size: 1.2em; /* Un poco más grande para destacarse */
+    margin-top: 10px; /* Espacio superior para separarlo de otros párrafos */
+}
+
+/* Contenedor para los botones de acción (Confirmar, Cancelar, etc.) */
+.acciones-reserva {
+    margin-top: 15px; /* Espacio superior */
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones se envuelvan a la siguiente línea si no hay espacio */
+    gap: 10px; /* Espacio entre los botones */
+    justify-content: flex-start; /* Alinea los botones al inicio */
+}
+
+/* Estilos base para todos los botones de acción */
+.btn-accion {
+    padding: 10px 18px;
+    border: none; /* Sin borde por defecto */
+    border-radius: 25px; /* Bordes muy redondeados para un aspecto moderno */
+    cursor: pointer; /* Indica que es clickeable */
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves */
+    text-align: center;
+    white-space: nowrap; /* Evita que el texto del botón se rompa en varias líneas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera para un efecto de profundidad */
+}
+
+/* Efecto hover para todos los botones de acción */
+.btn-accion:hover {
+    transform: translateY(-2px); /* Ligeramente hacia arriba */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Colores específicos para cada tipo de botón */
+.btn-confirmar {
+    background-color: #28a745; /* Verde estándar (Bootstrap success) */
+    color: white;
+}
+.btn-confirmar:hover {
+    background-color: #218838; /* Verde un poco más oscuro al pasar el ratón */
+}
+
+.btn-cancelar {
+    background-color: #dc3545; /* Rojo estándar (Bootstrap danger) */
+    color: white;
+}
+.btn-cancelar:hover {
+    background-color: #c82333; /* Rojo un poco más oscuro al pasar el ratón */
+}
+
+.btn-completar {
+    background-color: #007bff; /* Azul estándar (Bootstrap primary) */
+    color: white;
+}
+.btn-completar:hover {
+    background-color: #0069d9; /* Azul un poco más oscuro al pasar el ratón */
+}
+
+.btn-eliminar {
+    background-color: #6c757d; /* Gris estándar (Bootstrap secondary) */
+    color: white;
+}
+.btn-eliminar:hover {
+    background-color: #5a6268; /* Gris un poco más oscuro al pasar el ratón */
+}
+
+/* Ajustes a los estilos de estado existentes para mejor visualización */
+/* Estas clases ya las tienes, pero si quieres un color más claro y mejor contraste */
+.estado-reserva {
+    display: inline-block; /* Asegura que padding y border-radius se apliquen correctamente */
+    margin-left: 5px; /* Pequeño espacio a la izquierda de la etiqueta "Estado:" */
+}
+
+.estado-pendiente {
+    background-color: #fff3cd; /* Amarillo pastel */
+    color: #856404; /* Texto amarillo oscuro */
+}
+
+.estado-confirmada {
+    background-color: #d4edda; /* Verde pastel */
+    color: #155724; /* Texto verde oscuro */
+}
+
+.estado-cancelada {
+    background-color: #f8d7da; /* Rojo pastel */
+    color: #721c24; /* Texto rojo oscuro */
+}
+
+.estado-completada {
+    background-color: #e2e6ea; /* Gris pastel */
+    color: #383d41; /* Texto gris oscuro */
+}
+
+/* Mensajes de error o información, si los usas con la clase 'mensaje-error' */
+.mensaje-error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+}
+
