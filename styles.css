@@ -491,14 +491,16 @@ footer {
 }
 
 /* Estilos para la imagen del hotel en la página de detalle */
+/* Estilos para la imagen del hotel en la página de detalle */
 #imagen-hotel {
-    width: 80%;
-    max-width: 600px;
-    height: auto;
+    width: 100%; /* Ocupará el 100% del ancho de su contenedor (.hotel-visuals) */
+    max-width: 600px; /* Limita su ancho máximo a 600px */
+    height: 300px; /* <--- ¡ESTO ES LO NUEVO/CLAVE! Altura fija para todas las imágenes */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse, recortando si es necesario */
     border-radius: 8px;
-    object-fit: cover;
     margin-bottom: 15px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: block; /* Asegura que se comporte como un bloque y respete las dimensiones */
 }
 
 /* Estilos para la descripción del hotel en la página de detalle */
