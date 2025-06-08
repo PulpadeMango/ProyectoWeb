@@ -1,33 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
   fetch('get_reservas_usuarios.php', {
     method: "GET",
-    credentials: "include"
+    credentials: "include" // Asegura que las cookies de sesión se envíen
   })
     .then(res => {
+      // Siempre intentar parsear como JSON.
+      // Si la respuesta no es OK (ej. 404, 500) o si no es JSON válido,
+      // el .json() podría fallar o devolver un error que el .catch() manejará.
+      // Aquí solo verificamos si la respuesta HTTP es exitosa.
       if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
+        // Podríamos lanzar un error aquí con más detalle del status
+        // Por ejemplo, si el servidor devuelve un 401 por no autenticación,
+        // aunque tu PHP devuelve 200 con un JSON de error para esa condición.
+        // Aun así, es buena práctica mantener esta comprobación.
       }
-      return res.json();
+      return res.json(); // Parsea la respuesta del servidor como JSON
     })
     .then(data => {
+      // --- LÓGICA CLAVE PARA LA REDIRECCIÓN ---
+      // Verificar si la respuesta es un objeto y si contiene la propiedad 'error'
+      if (data && typeof data === 'object' && data.error) {
+        console.warn("Mensaje de error del servidor:", data.error); // Útil para depuración
+        if (data.error === "No has iniciado sesión.") {
+          // Si el error es específicamente por no haber iniciado sesión,
+          // redirigir al login.php. location.replace es preferible para limpiar el historial.
+          window.location.replace('login.php');
+          return; // Detener la ejecución de este bloque .then()
+        } else {
+          // Para otros errores reportados por el servidor (ej. conexión a DB fallida)
+          const contenedor = document.getElementById("reservas-container");
+          contenedor.innerHTML = `<p class="mensaje-error">Error al cargar tus reservas: ${data.error}</p>`;
+        }
+        return; // Detener la ejecución del .then() si ya se manejó un error
+      }
+      // --- FIN LÓGICA DE REDIRECCIÓN ---
+
+      // Si llegamos aquí, 'data' debe ser un array de reservas (o un array vacío)
       const contenedor = document.getElementById("reservas-container");
-      contenedor.innerHTML = "";
+      contenedor.innerHTML = ""; // Limpiar el mensaje de "Cargando reservas..."
 
       if (data.length === 0) {
         contenedor.innerHTML = "<p>No tienes reservas registradas.</p>";
-        return;
+        return; // Detener si no hay reservas para evitar el forEach
       }
 
+      // Si hay reservas, proceder a renderizarlas
       data.forEach(reserva => {
-        // Calcular el número de noches
         const fechaInicio = new Date(reserva.fecha_inicio);
         const fechaFin = new Date(reserva.fecha_fin);
         const diffTime = Math.abs(fechaFin - fechaInicio);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        const totalPagar = (reserva.precio_habitacion * diffDays).toFixed(2); // Formatear a 2 decimales
+        const totalPagar = (reserva.precio_habitacion * diffDays).toFixed(2);
 
         const card = document.createElement("div");
-        card.className = "hotel"; // Mantener la clase "hotel" para el estilo general de tarjeta
+        card.className = "hotel";
 
         card.innerHTML = `
           ${reserva.imagen_hotel ? `<div class="imagen-reserva"><img src="${reserva.imagen_hotel}" alt="Imagen del Hotel ${reserva.nombre_hotel}"></div>` : ''}
@@ -52,8 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     })
     .catch(error => {
-      console.error("Error al cargar las reservas:", error);
-      document.getElementById("reservas-container").innerHTML = `<p class='mensaje-error'>Error al cargar tus reservas: ${error.message}. Por favor, inténtalo de nuevo más tarde.</p>`;
+      console.error("Error en la solicitud de reservas:", error);
+      // Este catch captura errores de red (ej. servidor no disponible)
+      // o si la respuesta no es un JSON válido (ej. HTML de un error 500).
+      document.getElementById("reservas-container").innerHTML =
+        `<p class="mensaje-error">No se pudieron cargar tus reservas. Por favor, revisa tu conexión o inténtalo más tarde. (Detalle: ${error.message})</p>`;
     });
 
   // Asegúrate de que verificarSesionYActualizarUI se llama si existe
@@ -62,10 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Las funciones getBotonesEstado, cambiarEstado y eliminarReserva se mantienen igual.
+// Solo asegúrate de que están definidas en tu archivo mis_reservas.js o en un script.js que se carga antes.
 
 function getBotonesEstado(estado, id) {
   let botones = [];
-  // Asegúrate de usar las clases CSS que definirás en styles.css
   if (estado === "Pendiente") {
     botones.push(`<button class="btn-accion btn-confirmar" onclick="cambiarEstado(${id}, 'Confirmada')">Confirmar</button>`);
     botones.push(`<button class="btn-accion btn-cancelar" onclick="cambiarEstado(${id}, 'Cancelada')">Cancelar</button>`);
@@ -75,18 +105,15 @@ function getBotonesEstado(estado, id) {
   } else if (estado === "Cancelada") {
     botones.push(`<button class="btn-accion btn-eliminar" onclick="eliminarReserva(${id})">Eliminar</button>`);
   }
-  // Para "Completada" no se añaden botones por defecto, puedes añadir si hay alguna acción post-completado.
-
   return botones.join(" ");
 }
 
-// Las funciones cambiarEstado y eliminarReserva se mantienen igual
 function cambiarEstado(id_reserva, nuevo_estado) {
-  fetch('update_estado_reservas.php', { // Corregido el nombre del archivo si era 'actualizar_estado_reserva.php'
+  fetch('update_estado_reservas.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: "include",
-    body: JSON.stringify({ id_reserva, estado: nuevo_estado }) // Cambiado 'nuevo_estado' a 'estado' para que coincida con el PHP
+    body: JSON.stringify({ id_reserva, estado: nuevo_estado })
   })
     .then(res => {
       if (!res.ok) {
@@ -97,12 +124,10 @@ function cambiarEstado(id_reserva, nuevo_estado) {
     .then(data => {
       if (data.success) {
         const spanEstado = document.querySelector(`#estado-${id_reserva}`);
-        if (spanEstado) { // Verificar si el elemento existe antes de manipularlo
+        if (spanEstado) {
             spanEstado.textContent = nuevo_estado;
             spanEstado.className = `estado-reserva estado-${nuevo_estado.toLowerCase()}`;
-            // Recargar la lista de reservas para actualizar los botones
-            // Esto es una forma simple, pero puede ser más eficiente actualizar solo la tarjeta
-            location.reload(); // Recargar la página para ver los cambios
+            location.reload();
         }
         alert('Estado actualizado correctamente.');
       } else {
@@ -132,13 +157,11 @@ function eliminarReserva(id_reserva) {
     })
     .then(data => {
       if (data.success) {
-        // Eliminar la tarjeta de la reserva del DOM
         const cardToRemove = document.querySelector(`#reservas-container .hotel [onclick*="eliminarReserva(${id_reserva})"]`).closest('.hotel');
         if (cardToRemove) {
           cardToRemove.remove();
         }
         alert("Reserva eliminada correctamente.");
-        // Si no quedan reservas, mostrar el mensaje de "No tienes reservas"
         const contenedor = document.getElementById("reservas-container");
         if (contenedor.children.length === 0) {
             contenedor.innerHTML = "<p>No tienes reservas registradas.</p>";
