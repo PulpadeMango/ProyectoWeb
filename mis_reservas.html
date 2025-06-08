@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mis Reservas</title>
+  <link rel="icon" type="image/png" href="favicon.png?v=1">
+  <title>Hoteles La Residencia del Bien</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <header>
-    <h1>Mis Reservas</h1>
+      <h1 id="titulo-easter">Hoteles la Residencia del Bien</h1>
     <nav>
         <a href="index.html" class="nav-button">Inicio</a> <a href="ofertas.html" class="nav-button">Ofertas</a>
         <a href="mis_reservas.html" class="nav-button">Mis Reservas</a> <div id="auth-controls">
@@ -19,20 +20,61 @@
     </nav>
   </header>
 
-  <main class="contenedor">
-    <section>
-      <h2>Reservaciones actuales</h2>
-      <div id="reservas-container" class="grid-ofertas">
-        <p>Cargando reservas...</p>
+  <main>
+    <section id="buscador">
+      <div class="container">
+        <input type="text" id="busqueda" placeholder="Buscar hotel por nombre...">
+        <select id="filtro-pais">
+          <option value="">Todos los países</option>
+        </select>
+        <input type="number" id="precio-min" placeholder="Precio mínimo">
+        <input type="number" id="precio-max" placeholder="Precio máximo">
+        <button onclick="filtrarHoteles()">Buscar</button>
+        <button onclick="reiniciarFiltros()">Reiniciar</button>
+      </div>
+    </section>
+
+    <section id="resultados" style="display: none;" class="seccion-hoteles">
+      <h2>🔎 Resultados de búsqueda</h2>
+      <div id="lista-hoteles" class="grid-ofertas"></div>
+    </section>
+
+    <section class="seccion-hoteles">
+      <h2>🏅 Hoteles Destacados</h2>
+      <div style="display: flex; align-items: center;">
+        <button class="flecha-carrusel" onclick="moverCarrusel('destacados', -1)">←</button>
+        <div id="carrusel-destacados" class="carrusel"></div>
+        <button class="flecha-carrusel" onclick="moverCarrusel('destacados', 1)">→</button>
+      </div>
+    </section>
+
+    <section class="seccion-hoteles">
+      <h2>💰 Ofertas increíbles</h2>
+      <div style="display: flex; align-items: center;">
+        <button class="flecha-carrusel" onclick="moverCarrusel('ofertas', -1)">←</button>
+        <div id="carrusel-ofertas" class="carrusel"></div>
+        <button class="flecha-carrusel" onclick="moverCarrusel('ofertas', 1)">→</button>
+      </div>
+      <a class="ver-mas" href="ofertas.html">Ver más ofertas</a>
+    </section>
+
+    <section class="seccion-hoteles">
+      <h2>🌍 Descubre nuevas experiencias</h2>
+      <div style="display: flex; align-items: center;">
+        <button class="flecha-carrusel" onclick="moverCarrusel('experiencias', -1)">←</button>
+        <div id="carrusel-experiencias" class="carrusel"></div>
+        <button class="flecha-carrusel" onclick="moverCarrusel('experiencias', 1)">→</button>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer id="contacto">
+    <h2>¿Tienes preguntas o sugerencias?</h2>
+    <p>Contáctanos: contacto@residenciadelbien.com</p>
+    <p>Teléfono: +52 123 456 7890</p>
     <p>&copy; 2025 Hoteles la Residencia del Bien. Todos los derechos reservados.</p>
   </footer>
 
-  <script src="script.js"></script> <!-- Verificación de sesión -->
-  <script src="mis_reservas.js"></script> <!-- Carga y control de reservas -->
+  <script src="script.js"></script>
 </body>
 </html>

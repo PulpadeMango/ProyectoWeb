@@ -1,88 +1,123 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle del Hotel</title>
-    <link rel="stylesheet" href="styles.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalle del Hotel</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="favicon.png?v=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    #imagen-hotel {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .btn-reservar-estilizado {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #008080;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .btn-reservar-estilizado:hover {
+      background-color: #006666;
+    }
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 0.95em;
+      text-decoration: none;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-    <header class="hotel-header">
-        <a href="index.html" class="back-button">
-            <span class="arrow-left">&larr;</span> Regresar
-        </a>
-        <nav>
-            <a href="index.html">Inicio</a>
-            <a href="ofertas.html">Ofertas</a>
-                                    <div id="auth-controls">
-                <a href="login.php" class="login-btn">Iniciar Sesión</a> </div>
-        </nav>
-    </header>
 
-    <main class="contenedor">
-        <section class="detalle-hotel">
-            <h1 id="nombre-hotel-header">Nombre del Hotel</h1>
-            <div class="hotel-visuals">
-                <img id="imagen-hotel" src="placeholder.jpg" alt="Imagen del hotel">
-                <p id="descripcion-hotel" class="descripcion-hotel"></p> 
-            </div>
+  <header>
+    <h1 id="titulo-easter">Hoteles la Residencia del Bien</h1>
+    <nav>
+      <a href="index.html" class="nav-button">Inicio</a>
+      <a href="ofertas.html" class="nav-button">Ofertas</a>
+      <a href="mis_reservas.html" class="nav-button">Mis Reservas</a>
+      <div id="auth-controls">
+        <a href="login.php" class="login-btn">Iniciar sesión</a>
+      </div>
+    </nav>
+  </header>
 
-            <hr>
+  <main class="contenedor">
+   
 
-            <h3>Acerca del Hotel</h3>
-            <p id="descripcion-detallada" class="descripcion-detallada"></p>
+    <section class="detalle-hotel">
+      <h1 id="nombre-hotel-header">Nombre del Hotel</h1>
+      <div class="hotel-visuals">
+        <img id="imagen-hotel" src="placeholder.jpg" alt="Imagen del hotel" />
+        <p id="descripcion-hotel" class="descripcion-hotel"></p>
+      </div>
 
-            <hr>
+      <hr />
 
-            <h3>Servicios Ofrecidos</h3>
-            <ul id="servicios-hotel">
-                <li>Cargando servicios...</li>
-            </ul>
+      <h3>Acerca del Hotel</h3>
+      <p id="descripcion-detallada" class="descripcion-detallada"></p>
 
-            <hr>
+      <hr />
 
-            <div id="reseñas">
-                <h3>Calificación y Reseñas</h3>
-                <p>Calificación Promedio: <strong id="calificacion-promedio">N/A</strong> (<span id="total-reseñas">0</span> reseñas)</p>
-                <button id="btn-escribir-reseña" class="btn-escribir-reseña" style="display: none;">Escribir Reseña</button>
-                
-                <div id="lista-reseñas">
-                    <h4>Reseñas de Usuarios:</h4>
-                </div>
-            </div>
+      <h3>Servicios Ofrecidos</h3>
+      <ul id="servicios-hotel">
+        <li>Cargando servicios...</li>
+      </ul>
 
-            <a href="rooms.html?id_hotel=X" class="btn-reservar-estilizado" id="btn-reservar-hotel">Reservar este hotel</a>
-        </section>
-    </main>
+      <hr />
 
-    <footer id="contacto">
-        <h2>Contáctanos</h2>
-        <p>Email: info@hoteleslabien.com</p>
-        <p>Teléfono: +52 55 1234 5678</p>
-        <p>Dirección: Av. Principal #123, La Paz, México</p>
-    </footer>
+      <div id="reseñas">
+        <h3>Calificación y Reseñas</h3>
+        <p>
+          Calificación Promedio: <strong id="calificacion-promedio">N/A</strong> (<span id="total-reseñas">0</span> reseñas)
+        </p>
+        <button id="btn-escribir-reseña" class="btn-escribir-reseña" style="display: none;">Escribir Reseña</button>
+        <div id="lista-reseñas">
+          <h4>Reseñas de Usuarios:</h4>
+        </div>
+      </div>
 
-    <div id="modal-reseña" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Escribir Reseña</h2>
-            <form id="form-reseña">
-                <label for="calificacion">Calificación:</label>
-                <div class="calificacion-estrellas">
-                    <input type="radio" id="estrella5" name="calificacion" value="5"><label for="estrella5" title="5 estrellas">&#9733;</label>
-                    <input type="radio" id="estrella4" name="calificacion" value="4"><label for="estrella4" title="4 estrellas">&#9733;</label>
-                    <input type="radio" id="estrella3" name="calificacion" value="3"><label for="estrella3" title="3 estrellas">&#9733;</label>
-                    <input type="radio" id="estrella2" name="calificacion" value="2"><label for="estrella2" title="2 estrellas">&#9733;</label>
-                    <input type="radio" id="estrella1" name="calificacion" value="1"><label for="estrella1" title="1 estrella">&#9733;</label>
-                </div>
-                <label for="comentario-reseña">Tu Reseña:</label>
-                <textarea id="comentario-reseña" rows="5" placeholder="Escribe tu reseña aquí..." required style="width: calc(100% - 20px); padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em; box-sizing: border-box;"></textarea>
-                <button type="submit">Publicar Reseña</button>
-                <div id="mensaje-modal-reseña" class="modal-message" style="display: none;"></div>
-            </form>
-        </div>
-    </div>
+      <a href="rooms.html?id_hotel=XX&tabla=hoteles_del_mal" class="btn-reservar-estilizado" id="btn-reservar-hotel">Reservar este hotel</a>
+    </section>
+  </main>
 
-    <script src="hotel.js"></script>
+  <footer id="contacto">
+    <h2>¿Tienes preguntas o sugerencias?</h2>
+    <p>Contáctanos: contacto@residenciadelbien.com</p>
+    <p>Teléfono: +52 123 456 7890</p>
+    <p>&copy; 2025 Hoteles la Residencia del Bien. Todos los derechos reservados.</p>
+  </footer>
+
+  <div id="modal-reseña" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Escribir Reseña</h2>
+      <form id="form-reseña">
+        <label for="calificacion">Calificación:</label>
+        <div class="calificacion-estrellas">
+          <input type="radio" id="estrella5" name="calificacion" value="5"><label for="estrella5">&#9733;</label>
+          <input type="radio" id="estrella4" name="calificacion" value="4"><label for="estrella4">&#9733;</label>
+          <input type="radio" id="estrella3" name="calificacion" value="3"><label for="estrella3">&#9733;</label>
+          <input type="radio" id="estrella2" name="calificacion" value="2"><label for="estrella2">&#9733;</label>
+          <input type="radio" id="estrella1" name="calificacion" value="1"><label for="estrella1">&#9733;</label>
+        </div>
+        <label for="comentario-reseña">Tu Reseña:</label>
+        <textarea id="comentario-reseña" rows="5" placeholder="Escribe tu reseña aquí..." required></textarea>
+        <button type="submit">Publicar Reseña</button>
+        <div id="mensaje-modal-reseña" class="modal-message" style="display: none;"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="hotel.js"></script>
 </body>
 </html>

@@ -1,53 +1,82 @@
 let todosLosHoteles = [];
-let modoMalActivo = false;
+let modoMalActivo = localStorage.getItem("modoMalvado") === "activo";
 
 document.addEventListener("DOMContentLoaded", () => {
   const titulo = document.getElementById("titulo-easter");
   const audio = new Audio("audio-easteregg.mp3");
 
-  // Hacer el título clickeable
   titulo.style.cursor = "pointer";
 
-  titulo.addEventListener("click", () => {
-    if (!modoMalActivo) {
-      modoMalActivo = true;
+  // Restaurar modo malvado si estaba activo
+  if (modoMalActivo) {
+    activarModoMalvadoVisual();
+  }
 
+  titulo.addEventListener("click", () => {
+    modoMalActivo = !modoMalActivo;
+
+    if (modoMalActivo) {
       audio.play().catch(err => console.error("No se pudo reproducir el audio:", err));
       titulo.classList.add("sacudir");
       setTimeout(() => titulo.classList.remove("sacudir"), 1000);
-
-      document.body.classList.add("modo-oscuro", "cambio-cursor");
-      document.getElementById("titulo-easter").textContent = "Resident Evil";
-
-      // Cargar tabla alternativa
-      fetch("https://hotelesresidenciadelbien.alwaysdata.net/get_data.php?tabla=hoteles_del_mal")
-        .then(res => res.json())
-        .then(hotelesMal => {
-          todosLosHoteles = hotelesMal;
-          mostrarHoteles(hotelesMal);
-
-          const destacados = [...hotelesMal].sort((a, b) => b.precio - a.precio).slice(0, 5);
-          renderCarrusel(destacados, "carrusel-destacados");
-
-          const ofertas = [...hotelesMal].sort((a, b) => a.precio - b.precio).slice(0, 5);
-          renderCarrusel(ofertas, "carrusel-ofertas");
-
-          const aleatorios = hotelesMal.sort(() => 0.5 - Math.random()).slice(0, 5);
-          renderCarrusel(aleatorios, "carrusel-experiencias");
-        })
-        .catch(err => console.error("Error al cargar hoteles del mal:", err));
+      localStorage.setItem("modoMalvado", "activo");
+      activarModoMalvadoVisual();
+      cargarHotelesDelMal();
+    } else {
+      localStorage.removeItem("modoMalvado");
+      desactivarModoMalvadoVisual();
+      cargarHotelesNormales();
     }
   });
 
   verificarSesionYActualizarUI();
 
-  // Cargar hoteles normales por defecto
+  // Carga inicial (según modo)
+  if (modoMalActivo) {
+    cargarHotelesDelMal();
+  } else {
+    cargarHotelesNormales();
+  }
+});
+
+function activarModoMalvadoVisual() {
+  document.body.classList.add("modo-oscuro", "cambio-cursor");
+  const titulo = document.getElementById("titulo-easter");
+  if (titulo) titulo.textContent = "Resident Evil";
+}
+
+function desactivarModoMalvadoVisual() {
+  document.body.classList.remove("modo-oscuro", "cambio-cursor");
+  const titulo = document.getElementById("titulo-easter");
+  if (titulo) titulo.textContent = "Hoteles la Residencia del Bien";
+}
+
+function cargarHotelesDelMal() {
+  fetch("https://hotelesresidenciadelbien.alwaysdata.net/get_data.php?tabla=hoteles_del_mal")
+    .then(res => res.json())
+    .then(hotelesMal => {
+      todosLosHoteles = hotelesMal;
+      mostrarHoteles(hotelesMal);
+
+      const destacados = [...hotelesMal].sort((a, b) => b.precio - a.precio).slice(0, 5);
+      renderCarrusel(destacados, "carrusel-destacados");
+
+      const ofertas = [...hotelesMal].sort((a, b) => a.precio - b.precio).slice(0, 5);
+      renderCarrusel(ofertas, "carrusel-ofertas");
+
+      const aleatorios = hotelesMal.sort(() => 0.5 - Math.random()).slice(0, 5);
+      renderCarrusel(aleatorios, "carrusel-experiencias");
+    })
+    .catch(err => console.error("Error al cargar hoteles del mal:", err));
+}
+
+function cargarHotelesNormales() {
   fetch("https://hotelesresidenciadelbien.alwaysdata.net/get_data.php")
     .then(res => res.json())
     .then(hoteles => {
       todosLosHoteles = hoteles;
 
-      document.getElementById("busqueda").addEventListener("keydown", function (e) {
+      document.getElementById("busqueda").addEventListener("keydown", e => {
         if (e.key === "Enter") filtrarHoteles();
       });
 
@@ -75,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       renderCarrusel(aleatorios, "carrusel-experiencias");
     })
     .catch(error => console.error("Error al cargar hoteles:", error));
-});
+}
 
 function verificarSesionYActualizarUI() {
   fetch("ver_sesion.php")
@@ -84,12 +113,7 @@ function verificarSesionYActualizarUI() {
       const authControls = document.getElementById("auth-controls");
       if (authControls) {
         authControls.innerHTML = data.autenticado
-          ? `
-            <span class="user-info">
-              <i class="user-icon">👤</i> <span>Hola, ${data.nombre}</span>
-            </span>
-            <a href="logout.php" class="logout-btn">Cerrar sesión</a>
-          `
+          ? `<span class="user-info"><i class="user-icon">👤</i> <span>Hola, ${data.nombre}</span></span><a href="logout.php" class="logout-btn">Cerrar sesión</a>`
           : `<a href="login.php" class="login-btn">Iniciar sesión</a>`;
       }
     })
@@ -183,6 +207,7 @@ function reiniciarFiltros() {
 function llenarFiltroPais(hoteles) {
   const paises = [...new Set(hoteles.map(h => h.pais))].sort();
   const select = document.getElementById("filtro-pais");
+  select.innerHTML = `<option value="">Todos los países</option>`;
   paises.forEach(p => {
     const option = document.createElement("option");
     option.value = p;
