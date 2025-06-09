@@ -1,855 +1,855 @@
-/* RESETEO BÁSICO */
-/* Elimina márgenes y paddings predeterminados del navegador y establece el box-sizing para facilitar el diseño. */
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ESTILOS GLOBALES */
-/* Define las propiedades tipográficas y de fondo generales para todo el cuerpo del documento. */
+
+
 body {
-    font-family: 'Inter', sans-serif; /* Fuente principal para el texto. */
-    background-color: #f0f2f5; /* Color de fondo claro para la página. */
-    line-height: 1.6; /* Mejora la legibilidad del texto. */
-    color: #333; /* Color de texto por defecto. */
+    font-family: 'Inter', sans-serif; 
+    background-color: #f0f2f5; 
+    line-height: 1.6; 
+    color: #333; 
 }
 
-/* Contenedor principal para centrar el contenido y aplicar un ancho máximo. */
+
 .contenedor {
-    max-width: 1400px; /* Ancho máximo del contenido principal. */
-    margin: 0 auto; /* Centra el contenedor horizontalmente. */
-    padding: 0 20px; /* Padding horizontal para evitar que el contenido toque los bordes de la pantalla. */
+    max-width: 1400px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
 }
 
-/* Media query para ajustar el ancho del contenedor en pantallas muy grandes. */
+
 @media screen and (min-width: 1800px) {
     .contenedor {
-        max-width: 1600px; /* Aumenta el ancho máximo para monitores más grandes. */
+        max-width: 1600px; 
     }
 }
 
-/* --------- HEADER GENERAL (PARA index.html, ofertas.html, rooms.html) --------- */
-/* Estilos para la cabecera principal de la aplicación. */
+
+
 header {
-    background-color: #005f73; /* Color de fondo oscuro del header. */
-    color: white; /* Color de texto en el header. */
-    padding: 20px; /* Espaciado interno. */
-    display: flex; /* Utiliza flexbox para alinear los elementos. */
-    justify-content: space-between; /* Distribuye el espacio entre los elementos: título a la izquierda, navegación a la derecha. */
-    align-items: center; /* Alinea los elementos verticalmente al centro. */
-    flex-wrap: wrap; /* Permite que los elementos del header se envuelvan en pantallas pequeñas. */
-    min-height: 80px; /* Altura mínima del header. */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para el header. */
+    background-color: #005f73; 
+    color: white; 
+    padding: 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    flex-wrap: wrap; 
+    min-height: 80px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
-/* Estilos para el título principal dentro del header (e.g., "Hoteles la Residencia del Bien" / "Resident Evil"). */
+
 header h1 {
-    font-size: 1.8em; /* Tamaño de fuente del título. */
-    margin: 0; /* Elimina márgenes predeterminados. */
-    flex-grow: 1; /* Permite que el título ocupe el espacio disponible. */
-    text-align: left; /* Alinea el texto a la izquierda. */
+    font-size: 1.8em; 
+    margin: 0; 
+    flex-grow: 1; 
+    text-align: left; 
 }
 
-/* Estilos para el contenedor de navegación dentro del header. */
+
 header nav {
-    display: flex; /* Utiliza flexbox para los enlaces de navegación. */
-    gap: 15px; /* Espacio entre los elementos de navegación. */
-    align-items: center; /* Alinea los elementos verticalmente al centro. */
+    display: flex; 
+    gap: 15px; 
+    align-items: center; 
 }
 
-/* Estilos para los enlaces de navegación. */
+
 header nav a {
-    color: white; /* Color de texto de los enlaces. */
-    text-decoration: none; /* Elimina el subrayado predeterminado. */
-    font-weight: bold; /* Texto en negrita. */
-    padding: 5px 10px; /* Añade un poco de padding para que sean más clickeables. */
-    transition: color 0.3s ease; /* Transición suave para el cambio de color. */
+    color: white; 
+    text-decoration: none; 
+    font-weight: bold; 
+    padding: 5px 10px; 
+    transition: color 0.3s ease; 
 }
 
-/* Efecto hover para los enlaces de navegación. */
+
 header nav a:hover {
-    color: #a8dadc; /* Un tono más claro al pasar el ratón. */
+    color: #a8dadc; 
 }
 
-/* Estilos para el botón de "Iniciar sesión" cuando el usuario NO está logueado. */
+
 header .login-btn {
-    background-color: #0a9396; /* Color de fondo del botón. */
-    color: white; /* Color de texto del botón. */
-    padding: 8px 16px; /* Espaciado interno. */
-    border: none; /* Sin borde. */
-    border-radius: 5px; /* Bordes redondeados. */
-    cursor: pointer; /* Cambia el cursor a una mano para indicar que es clickeable. */
-    text-decoration: none; /* Elimina el subrayado del enlace. */
-    font-weight: bold; /* Texto en negrita. */
-    transition: background-color 0.3s ease; /* Transición suave para el cambio de color de fondo. */
+    background-color: #0a9396; 
+    color: white; 
+    padding: 8px 16px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: background-color 0.3s ease; 
 }
 
-/* Efecto hover para el botón de "Iniciar sesión". */
+
 header .login-btn:hover {
-    background-color: #00707b; /* Tono más oscuro al pasar el ratón. */
+    background-color: #00707b; 
 }
 
-/* ----------- ESTILOS ESPECÍFICOS PARA EL HEADER DE HOTEL.HTML y ROOMS.HTML ----------- */
-/* Ajustes para el header en páginas de detalle de hotel o habitaciones. */
+
+
 .hotel-header {
-    position: relative; /* Permite posicionar elementos hijos absolutamente. */
-    display: flex; /* Asegura el layout de flexbox. */
-    justify-content: center; /* Centra el contenido horizontalmente. */
-    align-items: center; /* Alinea los elementos verticalmente al centro. */
-    text-align: center; /* Para el título. */
+    position: relative; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
 }
 
-/* Ajustes para el título dentro del header de hotel/rooms.html. */
+
 .hotel-header h1 {
-    text-align: center; /* Centra el texto del título. */
-    flex-grow: 0; /* Desactiva el crecimiento para que el título no ocupe todo el espacio. */
-    padding-left: 0; /* Elimina padding que podría desplazar el título. */
-    padding-right: 0; /* Elimina padding que podría desplazar el título. */
+    text-align: center; 
+    flex-grow: 0; 
+    padding-left: 0; 
+    padding-right: 0; 
 }
 
-/* Estilos para el botón de regreso (APLICADO EN hotel.html, rooms.html) */
+
 .back-button {
-    display: flex; /* Utiliza flexbox para alinear el icono y el texto. */
-    align-items: center; /* Alinea los elementos verticalmente al centro. */
-    gap: 8px; /* Espacio entre el icono y el texto. */
-    color: white; /* Color de texto del botón. */
-    text-decoration: none; /* Elimina el subrayado del enlace. */
-    font-weight: bold; /* Texto en negrita. */
-    padding: 10px 15px; /* Espaciado interno. */
-    background-color: #0a9396; /* Color de fondo del botón. */
-    border-radius: 5px; /* Bordes redondeados. */
-    position: absolute; /* Posicionamiento absoluto en relación con el header. */
-    top: 20px; /* Distancia desde la parte superior del header. */
-    left: 20px; /* Distancia desde la izquierda del header. */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves. */
-    z-index: 1000; /* Asegura que el botón esté por encima de otros elementos. */
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    color: white; 
+    text-decoration: none; 
+    font-weight: bold; 
+    padding: 10px 15px; 
+    background-color: #0a9396; 
+    border-radius: 5px; 
+    position: absolute; 
+    top: 20px; 
+    left: 20px; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    z-index: 1000; 
 }
 
-/* Efecto hover para el botón de regreso. */
+
 .back-button:hover {
-    background-color: #00707b; /* Tono más oscuro al pasar el ratón. */
-    transform: translateX(-3px); /* Pequeño desplazamiento hacia la izquierda. */
+    background-color: #00707b; 
+    transform: translateX(-3px); 
 }
 
-/* Estilos para el icono de flecha dentro del botón de regreso. */
+
 .arrow-left {
-    font-size: 1.5em; /* Tamaño de fuente del icono. */
-    line-height: 1; /* Altura de línea para alinear el icono. */
+    font-size: 1.5em; 
+    line-height: 1; 
 }
 
-/* --------- BUSCADOR (DE index.html) --------- */
-/* Contenedor del formulario de búsqueda y filtros. */
+
+
 #buscador .container {
-    display: flex; /* Utiliza flexbox para organizar los campos de búsqueda. */
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas. */
-    gap: 15px; /* Espacio entre los elementos del formulario. */
-    justify-content: center; /* Centra los elementos horizontalmente. */
-    align-items: center; /* Alinea los elementos verticalmente al centro. */
-    margin-top: 30px; /* Margen superior. */
-    padding: 20px; /* Espaciado interno. */
-    background-color: white; /* Color de fondo blanco. */
-    border-radius: 10px; /* Bordes redondeados. */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Sombra suave. */
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 15px; 
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 30px; 
+    padding: 20px; 
+    background-color: white; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08); 
 }
 
-/* Estilos generales para inputs y selects dentro del buscador. */
+
 #buscador input,
 #buscador select {
-    padding: 10px; /* Espaciado interno. */
-    border-radius: 20px; /* Bordes muy redondeados. */
-    border: 1px solid #ccc; /* Borde delgado. */
-    font-size: 14px; /* Tamaño de fuente. */
-    min-width: 180px; /* Ancho mínimo. */
-    max-width: 240px; /* Ancho máximo. */
-    flex-grow: 1; /* Permite que los inputs se expandan para ocupar espacio. */
+    padding: 10px; 
+    border-radius: 20px; 
+    border: 1px solid #ccc; 
+    font-size: 14px; 
+    min-width: 180px; 
+    max-width: 240px; 
+    flex-grow: 1; 
 }
 
-/* Estilos para los botones dentro del buscador. */
+
 #buscador button {
-    padding: 10px 15px; /* Espaciado interno. */
-    border-radius: 20px; /* Bordes muy redondeados. */
-    border: none; /* Sin borde. */
-    background-color: #0a9396; /* Color de fondo. */
-    color: white; /* Color de texto. */
-    cursor: pointer; /* Cambia el cursor. */
-    transition: background 0.2s; /* Transición suave. */
-    font-size: 14px; /* Tamaño de fuente. */
-    font-weight: bold; /* Texto en negrita. */
+    padding: 10px 15px; 
+    border-radius: 20px; 
+    border: none; 
+    background-color: #0a9396; 
+    color: white; 
+    cursor: pointer; 
+    transition: background 0.2s; 
+    font-size: 14px; 
+    font-weight: bold; 
 }
 
-/* Efecto hover para los botones del buscador. */
+
 #buscador button:hover {
-    background-color: #00707b; /* Tono más oscuro al pasar el ratón. */
+    background-color: #00707b; 
 }
 
-/* Estilos específicos para el campo de búsqueda principal. */
+
 #busqueda {
-    width: 80%; /* Ancho. */
-    max-width: 500px; /* Ancho máximo. */
-    padding: 12px 18px; /* Espaciado interno. */
-    font-size: 16px; /* Tamaño de fuente. */
-    border: 1px solid #ccc; /* Borde. */
-    border-radius: 25px; /* Bordes muy redondeados. */
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.1); /* Sombra suave. */
-    transition: 0.3s ease; /* Transición suave. */
+    width: 80%; 
+    max-width: 500px; 
+    padding: 12px 18px; 
+    font-size: 16px; 
+    border: 1px solid #ccc; 
+    border-radius: 25px; 
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1); 
+    transition: 0.3s ease; 
 }
 
-/* Efecto focus para el campo de búsqueda. */
+
 #busqueda:focus {
-    outline: none; /* Elimina el contorno al enfocar. */
-    border-color: #0a9396; /* Cambia el color del borde. */
-    box-shadow: 0px 2px 8px rgba(10,147,150,0.3); /* Sombra más pronunciada. */
+    outline: none; 
+    border-color: #0a9396; 
+    box-shadow: 0px 2px 8px rgba(10,147,150,0.3); 
 }
 
-/* --------- SECCIONES DE HOTELES (DE index.html / ofertas.html) --------- */
-/* Contenedor general para las secciones de listado de hoteles. */
+
+
 .seccion-hoteles {
-    margin: 40px 0; /* Margen superior e inferior. */
-    padding: 0 20px; /* Padding horizontal. */
+    margin: 40px 0; 
+    padding: 0 20px; 
 }
 
-/* Títulos de las secciones de hoteles (e.g., "Hoteles Destacados"). */
+
 .seccion-hoteles h2 {
-    margin-bottom: 20px; /* Margen inferior. */
-    color: #333; /* Color de texto. */
-    text-align: center; /* Centra el texto. */
-    font-size: 2em; /* Tamaño de fuente. */
+    margin-bottom: 20px; 
+    color: #333; 
+    text-align: center; 
+    font-size: 2em; 
 }
 
-/* Contenedor para los carruseles de hoteles. */
+
 .carrusel {
-    display: flex; /* Utiliza flexbox para el desplazamiento horizontal. */
-    overflow-x: auto; /* Permite el desplazamiento horizontal. */
-    scroll-behavior: smooth; /* Desplazamiento suave. */
-    gap: 20px; /* Espacio entre los elementos del carrusel. */
-    padding-bottom: 10px; /* Espacio para la barra de desplazamiento si aparece. */
-    -ms-overflow-style: none;  /* Oculta la barra de desplazamiento para IE y Edge. */
-    scrollbar-width: none;  /* Oculta la barra de desplazamiento para Firefox. */
+    display: flex; 
+    overflow-x: auto; 
+    scroll-behavior: smooth; 
+    gap: 20px; 
+    padding-bottom: 10px; 
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
 }
 
-/* Oculta la barra de desplazamiento para navegadores basados en WebKit (Chrome, Safari, etc.). */
+
 .carrusel::-webkit-scrollbar {
     display: none;
 }
 
-/* Estilos para cada tarjeta de hotel en el carrusel o listados. */
+
 .hotel {
-    flex: 0 0 auto; /* Evita que el elemento se encoja o crezca, manteniendo su ancho fijo. */
-    width: 300px; /* Ancho fijo para las tarjetas de hotel. */
-    background-color: white; /* Color de fondo blanco. */
-    border-radius: 12px; /* Bordes más redondeados. */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Sombra suave. */
-    padding: 15px; /* Espaciado interno. */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para efectos hover. */
+    flex: 0 0 auto; 
+    width: 300px; 
+    background-color: white; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    padding: 15px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
-/* Efecto hover para las tarjetas de hotel. */
+
 .hotel:hover {
-    transform: translateY(-8px); /* Efecto de levantamiento al pasar el ratón. */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Sombra más pronunciada. */
+    transform: translateY(-8px); 
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
 }
 
-/* --------- IMÁGENES DE HOTEL (EN LISTADOS / OFERTAS) --------- */
-/* Contenedor para la imagen del hotel. */
+
+
 .imagen-hotel {
-    width: 100%; /* Ocupa todo el ancho de su contenedor. */
-    aspect-ratio: 16 / 9; /* Mantiene la proporción de imagen 16:9. */
-    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde. */
-    border-radius: 8px; /* Bordes redondeados. */
-    margin-bottom: 10px; /* Margen inferior. */
+    width: 100%; 
+    aspect-ratio: 16 / 9; 
+    overflow: hidden; 
+    border-radius: 8px; 
+    margin-bottom: 10px; 
 }
 
-/* Estilos para la imagen dentro del contenedor de imagen de hotel. */
+
 .imagen-hotel img {
-    width: 100%; /* Asegura que la imagen ocupe todo el ancho. */
-    height: 100%; /* Asegura que la imagen ocupe toda la altura. */
-    object-fit: cover; /* Recorta la imagen para que cubra completamente el área sin distorsionarse. */
-    display: block; /* Elimina el espacio extra que algunos navegadores añaden a las imágenes. */
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
 }
 
-/* Estilos para el título del hotel en las tarjetas. */
+
 .titulo-hotel {
-    font-size: 1.5em; /* Tamaño de fuente. */
-    color: #005f73; /* Color de texto. */
-    margin-bottom: 8px; /* Margen inferior. */
+    font-size: 1.5em; 
+    color: #005f73; 
+    margin-bottom: 8px; 
 }
 
-/* Estilos para los párrafos de información del hotel en las tarjetas. */
+
 .hotel p {
-    font-size: 0.95em; /* Tamaño de fuente. */
-    color: #555; /* Color de texto. */
-    margin-bottom: 5px; /* Margen inferior. */
+    font-size: 0.95em; 
+    color: #555; 
+    margin-bottom: 5px; 
 }
 
-/* --------- BOTÓN VER MÁS --------- */
-/* Estilos para los botones "Ver más". */
+
+
 .ver-mas {
-    margin-top: 25px; /* Aumenta el margen superior. */
-    display: inline-block; /* Permite aplicar padding y márgenes como un bloque, pero en línea con el texto. */
-    background-color: #005f73; /* Color de fondo. */
-    color: white; /* Color de texto. */
-    padding: 10px 25px; /* Más padding. */
-    text-decoration: none; /* Elimina el subrayado. */
-    border-radius: 25px; /* Más redondeado. */
-    transition: 0.3s ease; /* Transición suave. */
-    font-weight: bold; /* Texto en negrita. */
-    text-align: center; /* Centra el texto. */
+    margin-top: 25px; 
+    display: inline-block; 
+    background-color: #005f73; 
+    color: white; 
+    padding: 10px 25px; 
+    text-decoration: none; 
+    border-radius: 25px; 
+    transition: 0.3s ease; 
+    font-weight: bold; 
+    text-align: center; 
 }
 
-/* Efecto hover para el botón "Ver más". */
+
 .ver-mas:hover {
-    background-color: #0a9396; /* Tono más claro al pasar el ratón. */
-    transform: translateY(-2px); /* Pequeño efecto de levantamiento. */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave. */
+    background-color: #0a9396; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
-/* --------- FLECHAS DE CARRUSEL --------- */
-/* Estilos para las flechas de navegación de los carruseles. */
+
+
 .flecha-carrusel {
-    background-color: #0a9396; /* Color de fondo. */
-    color: white; /* Color de texto. */
-    border: none; /* Sin borde. */
-    font-size: 28px; /* Tamaño de fuente más grande. */
-    padding: 12px 18px; /* Más padding. */
-    border-radius: 50%; /* Completamente redondo. */
-    cursor: pointer; /* Cambia el cursor. */
-    margin: 10px; /* Margen alrededor de las flechas. */
-    transition: 0.3s ease; /* Transición suave. */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra. */
-    flex-shrink: 0; /* Evita que las flechas se encojan en un contenedor flex. */
+    background-color: #0a9396; 
+    color: white; 
+    border: none; 
+    font-size: 28px; 
+    padding: 12px 18px; 
+    border-radius: 50%; 
+    cursor: pointer; 
+    margin: 10px; 
+    transition: 0.3s ease; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
+    flex-shrink: 0; 
 }
 
-/* Efecto hover para las flechas del carrusel. */
+
 .flecha-carrusel:hover {
-    background-color: #00707b; /* Tono más oscuro al pasar el ratón. */
-    transform: scale(1.05); /* Ligeramente más grande. */
+    background-color: #00707b; 
+    transform: scale(1.05); 
 }
 
-/* --------- SECCIÓN DE CONTACTO / FOOTER --------- */
-/* Estilos para la sección de contacto. */
+
+
 #contacto {
-    background-color: #003845; /* Color de fondo oscuro. */
-    color: white; /* Color de texto. */
-    padding: 40px 20px; /* Más padding. */
-    text-align: center; /* Centra el texto. */
-    margin-top: 50px; /* Margen superior. */
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Sombra en la parte superior. */
+    background-color: #003845; 
+    color: white; 
+    padding: 40px 20px; 
+    text-align: center; 
+    margin-top: 50px; 
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); 
 }
 
-/* Título de la sección de contacto. */
+
 #contacto h2 {
-    margin-bottom: 20px; /* Margen inferior. */
-    color: white; /* Color de texto. */
-    font-size: 2em; /* Tamaño de fuente. */
+    margin-bottom: 20px; 
+    color: white; 
+    font-size: 2em; 
 }
 
-/* Párrafos dentro de la sección de contacto. */
+
 #contacto p {
-    margin: 8px 0; /* Margen vertical. */
-    font-size: 1.1em; /* Tamaño de fuente. */
+    margin: 8px 0; 
+    font-size: 1.1em; 
 }
 
-/* Estilos para el pie de página. */
+
 footer {
-    background-color: #003845; /* Color de fondo oscuro (igual que contacto para consistencia). */
-    color: white; /* Color de texto. */
-    padding: 20px; /* Espaciado interno. */
-    text-align: center; /* Centra el texto. */
-    margin-top: 30px; /* Margen superior. */
-    font-size: 0.9em; /* Tamaño de fuente. */
+    background-color: #003845; 
+    color: white; 
+    padding: 20px; 
+    text-align: center; 
+    margin-top: 30px; 
+    font-size: 0.9em; 
 }
 
-/* Estilos para los enlaces dentro de las tarjetas de hotel (para que toda la tarjeta sea clickeable). */
+
 .enlace-hotel {
-    display: block; /* Ocupa todo el espacio disponible para que toda la tarjeta sea el enlace. */
-    text-decoration: none; /* Elimina el subrayado. */
-    color: inherit; /* Hereda el color del texto del padre. */
+    display: block; 
+    text-decoration: none; 
+    color: inherit; 
 }
 
-/* Estilos para los contenedores de cuadrícula en ofertas.html y rooms.html. */
+
 .grid-ofertas, .grid-habitaciones {
-    display: grid; /* Utiliza CSS Grid para organizar las tarjetas. */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Columnas responsivas que se ajustan automáticamente. */
-    gap: 20px; /* Espacio entre las tarjetas. */
-    padding: 20px; /* Espaciado interno. */
-    justify-content: center; /* Centra las tarjetas si no llenan completamente la fila. */
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px; 
+    padding: 20px; 
+    justify-content: center; 
 }
 
-/* Centrar el contenedor del formulario (de login/registro/reservas). */
+
 .form-container {
-    max-width: 450px; /* Ancho máximo. */
-    margin: 80px auto; /* Margen superior e inferior, centrado horizontalmente. */
-    background-color: #ffffff; /* Fondo blanco. */
-    padding: 40px; /* Más padding. */
-    border-radius: 12px; /* Bordes redondeados. */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave. */
+    max-width: 450px; 
+    margin: 80px auto; 
+    background-color: #ffffff; 
+    padding: 40px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
 }
 
-/* Estilos para el formulario dentro del contenedor. */
+
 .form-container form {
-    display: flex; /* Utiliza flexbox para organizar los campos. */
-    flex-direction: column; /* Organiza los campos en una columna. */
+    display: flex; 
+    flex-direction: column; 
 }
 
-/* Estilos para las etiquetas de los campos del formulario. */
+
 .form-container label {
-    margin-bottom: 8px; /* Margen inferior. */
-    font-weight: bold; /* Texto en negrita. */
-    color: #333; /* Color de texto. */
+    margin-bottom: 8px; 
+    font-weight: bold; 
+    color: #333; 
 }
 
-/* Estilos para los campos de input del formulario. */
+
 .form-container input {
-    padding: 12px; /* Más padding. */
-    margin-bottom: 20px; /* Más espacio entre campos. */
-    border: 1px solid #ddd; /* Borde delgado. */
-    border-radius: 8px; /* Bordes redondeados. */
-    font-size: 1em; /* Tamaño de fuente. */
-    transition: border-color 0.3s ease; /* Transición suave para el color del borde. */
+    padding: 12px; 
+    margin-bottom: 20px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    font-size: 1em; 
+    transition: border-color 0.3s ease; 
 }
 
-/* Efecto focus para los inputs del formulario. */
+
 .form-container input:focus {
-    outline: none; /* Elimina el contorno al enfocar. */
-    border-color: #0a9396; /* Cambia el color del borde al enfocar. */
+    outline: none; 
+    border-color: #0a9396; 
 }
 
-/* Botón de envío del formulario. */
+
 .form-container button {
-    padding: 12px; /* Espaciado interno. */
-    background-color: #0a9396; /* Color de fondo. */
-    color: white; /* Color de texto. */
-    border: none; /* Sin borde. */
-    border-radius: 8px; /* Bordes redondeados. */
-    font-size: 1.1em; /* Tamaño de fuente. */
-    cursor: pointer; /* Cambia el cursor. */
-    transition: background-color 0.3s ease, transform 0.2s ease, font-weight 0.2s ease; /* Transiciones suaves. */
-    font-weight: bold; /* Texto en negrita. */
+    padding: 12px; 
+    background-color: #0a9396; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 1.1em; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease, font-weight 0.2s ease; 
+    font-weight: bold; 
 }
 
-/* Efecto hover para el botón del formulario. */
+
 .form-container button:hover {
-    background-color: #005f73; /* Tono más oscuro al pasar el ratón. */
-    transform: translateY(-2px); /* Pequeño efecto de levantamiento. */
+    background-color: #005f73; 
+    transform: translateY(-2px); 
 }
 
-/* Mensaje de error general. */
+
 .mensaje-error {
-    color: #d62828; /* Color de texto rojo fuerte. */
-    background-color: #ffe0e0; /* Fondo rojo claro. */
-    border: 1px solid #d62828; /* Borde rojo. */
-    padding: 15px; /* Espaciado interno. */
-    border-radius: 8px; /* Bordes redondeados. */
-    text-align: center; /* Centra el texto. */
-    margin: 20px auto; /* Margen vertical, centrado horizontalmente. */
-    max-width: 600px; /* Ancho máximo. */
-    font-weight: bold; /* Texto en negrita. */
+    color: #d62828; 
+    background-color: #ffe0e0; 
+    border: 1px solid #d62828; 
+    padding: 15px; 
+    border-radius: 8px; 
+    text-align: center; 
+    margin: 20px auto; 
+    max-width: 600px; 
+    font-weight: bold; 
 }
 
-/* Mensaje de información general (e.g., "Cargando habitaciones..."). */
+
 .mensaje-info {
-    color: #005f73; /* Color de texto primario. */
-    background-color: #e0f2f7; /* Fondo azul claro. */
-    border: 1px solid #005f73; /* Borde azul. */
-    padding: 15px; /* Espaciado interno. */
-    border-radius: 8px; /* Bordes redondeados. */
-    text-align: center; /* Centra el texto. */
-    margin: 20px auto; /* Margen vertical, centrado horizontalmente. */
-    max-width: 600px; /* Ancho máximo. */
+    color: #005f73; 
+    background-color: #e0f2f7; 
+    border: 1px solid #005f73; 
+    padding: 15px; 
+    border-radius: 8px; 
+    text-align: center; 
+    margin: 20px auto; 
+    max-width: 600px; 
 }
 
-/* Estilos para el texto de "¿Ya tienes una cuenta?" / "Iniciar sesión". */
+
 .form-container p {
-    text-align: center; /* Centra el texto. */
-    margin-top: 20px; /* Margen superior. */
-    font-size: 0.95em; /* Tamaño de fuente. */
+    text-align: center; 
+    margin-top: 20px; 
+    font-size: 0.95em; 
 }
 
-/* Estilos para el enlace dentro del párrafo. */
+
 .form-container a {
-    color: #0a9396; /* Color de texto. */
-    text-decoration: none; /* Sin subrayado. */
-    font-weight: bold; /* Texto en negrita. */
+    color: #0a9396; 
+    text-decoration: none; 
+    font-weight: bold; 
 }
 
-/* Efecto hover para el enlace. */
+
 .form-container a:hover {
-    text-decoration: underline; /* Subrayado al pasar el ratón. */
+    text-decoration: underline; 
 }
 
-/* ----------- ESTILOS PARA USUARIO LOGUEADO (CABECERA) ----------- */
-/* Contenedor para los controles de autenticación (nombre de usuario, cerrar sesión). */
+
+
 #auth-controls {
-    display: flex; /* Utiliza flexbox para alinear los elementos. */
-    align-items: center; /* Alinea verticalmente. */
-    gap: 15px; /* Espacio entre los elementos. */
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
 }
 
-/* Información del usuario logueado. */
+
 .user-info {
-    display: flex; /* Utiliza flexbox para alinear icono y nombre. */
-    align-items: center; /* Alinea verticalmente. */
-    gap: 5px; /* Espacio entre el icono y el nombre. */
-    color: white; /* Color de texto. */
-    font-weight: bold; /* Texto en negrita. */
-    white-space: nowrap; /* Evita que el texto se rompa en varias líneas. */
+    display: flex; 
+    align-items: center; 
+    gap: 5px; 
+    color: white; 
+    font-weight: bold; 
+    white-space: nowrap; 
 }
 
-/* Estilos para el icono de usuario. */
+
 .user-icon {
-    font-size: 1.2em; /* Tamaño del icono. */
-    /* Nota: Si se usa Font Awesome o un SVG, los estilos pueden ser específicos. */
+    font-size: 1.2em; 
+    
 }
 
-/* Estilos para el botón de "Cerrar sesión". */
+
 .logout-btn {
-    background-color: #d62828; /* Color de fondo rojo. */
-    color: white; /* Color de texto. */
-    padding: 8px 16px; /* Espaciado interno. */
-    border: none; /* Sin borde. */
-    border-radius: 5px; /* Bordes redondeados. */
-    cursor: pointer; /* Cambia el cursor. */
-    text-decoration: none; /* Sin subrayado. */
-    font-weight: bold; /* Texto en negrita. */
-    transition: background-color 0.3s ease; /* Transición suave. */
+    background-color: #d62828; 
+    color: white; 
+    padding: 8px 16px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: background-color 0.3s ease; 
 }
 
-/* Efecto hover para el botón de "Cerrar sesión". */
+
 .logout-btn:hover {
-    background-color: #a31d1d; /* Tono más oscuro al pasar el ratón. */
+    background-color: #a31d1d; 
 }
 
-/* ----------- ESTILOS ESPECÍFICOS PARA HOTEL.HTML ----------- */
 
-/* Sección para el detalle de un hotel específico. */
+
+
 .detalle-hotel {
-    max-width: 900px; /* Ancho máximo. */
-    margin: 30px auto; /* Margen superior e inferior, centrado horizontalmente. */
-    background-color: white; /* Fondo blanco. */
-    padding: 30px; /* Espaciado interno. */
-    border-radius: 12px; /* Bordes redondeados. */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Sombra suave. */
-    display: flex; /* Añadido: para organizar sus hijos en columna. */
-    flex-direction: column; /* Añadido: para organizar sus hijos en columna. */
-    align-items: center; /* Añadido: para centrar elementos internos. */
+    max-width: 900px; 
+    margin: 30px auto; 
+    background-color: white; 
+    padding: 30px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
 }
 
-/* Contenedor para la imagen y descripción que se centrará. */
+
 .hotel-visuals {
-    display: flex; /* Utiliza flexbox. */
-    flex-direction: column; /* Elementos en columna. */
-    align-items: center; /* Centra los elementos horizontalmente (en un flex-direction column). */
-    margin-bottom: 20px; /* Margen inferior. */
-    width: 100%; /* Asegura que ocupe todo el ancho del padre. */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    margin-bottom: 20px; 
+    width: 100%; 
 }
 
-/* Estilos para la imagen del hotel en la página de detalle (hotel.html) */
-/* Este ID se usa para la imagen principal y grande del hotel en su página de detalle. */
+
+
 #imagen-hotel {
-    width: 100%; /* Ocupará el 100% del ancho de su contenedor (.hotel-visuals) */
-    max-width: 600px; /* Limita su ancho máximo a 600px para pantallas grandes */
-    height: 300px; /* Altura fija para mantener consistencia en la visualización */
-    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse, recortando si es necesario */
-    border-radius: 8px; /* Bordes ligeramente redondeados */
-    margin-bottom: 15px; /* Espacio debajo de la imagen */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra sutil para darle profundidad */
-    display: block; /* Asegura que se comporte como un bloque y respete las dimensiones */
+    width: 100%; 
+    max-width: 600px; 
+    height: 300px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    margin-bottom: 15px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    display: block; 
 }
 
-/* Estilos para la descripción corta del hotel en la página de detalle */
+
 .descripcion-hotel {
-    text-align: center; /* Centra el texto de la descripción */
-    font-size: 1.1em; /* Tamaño de fuente ligeramente más grande */
-    color: #555; /* Color de texto gris */
-    line-height: 1.6; /* Mejora la legibilidad del texto */
-    margin-bottom: 20px; /* Espacio debajo de la descripción */
-    padding: 0 15px; /* Padding horizontal para el texto */
-    width: 100%; /* Ocupa todo el ancho disponible del contenedor padre */
+    text-align: center; 
+    font-size: 1.1em; 
+    color: #555; 
+    line-height: 1.6; 
+    margin-bottom: 20px; 
+    padding: 0 15px; 
+    width: 100%; 
 }
 
-/* Estilos para una descripción más detallada o una cita */
+
 .descripcion-detallada {
-    margin-top: 25px; /* Margen superior para separarlo de otros elementos */
-    font-size: 1.2em; /* Tamaño de fuente más grande para destacar */
-    line-height: 1.7; /* Mayor altura de línea para mejor legibilidad */
-    color: #333; /* Color de texto oscuro */
-    background-color: #f9f9f9; /* Fondo gris muy claro */
-    padding: 20px; /* Espaciado interno */
-    border-left: 5px solid #0a9396; /* Borde izquierdo de color primario para destacar */
-    border-radius: 6px; /* Bordes ligeramente redondeados */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Sombra sutil */
-    width: 100%; /* Ocupa todo el ancho disponible */
+    margin-top: 25px; 
+    font-size: 1.2em; 
+    line-height: 1.7; 
+    color: #333; 
+    background-color: #f9f9f9; 
+    padding: 20px; 
+    border-left: 5px solid #0a9396; 
+    border-radius: 6px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+    width: 100%; 
 }
 
-/* Estilos para las HR (líneas divisorias horizontales) */
+
 hr {
-    border: none; /* Elimina el borde predeterminado del navegador */
-    border-top: 1px solid #eee; /* Añade un borde superior delgado y gris claro */
-    margin: 25px 0; /* Margen vertical para separar contenido */
-    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    border: none; 
+    border-top: 1px solid #eee; 
+    margin: 25px 0; 
+    width: 100%; 
 }
 
-/* Estilos para los títulos h3 dentro de la sección de detalle del hotel */
+
 .detalle-hotel h3 {
-    color: #333; /* Color de texto oscuro */
-    margin-top: 25px; /* Margen superior para separación */
-    margin-bottom: 15px; /* Margen inferior */
-    text-align: center; /* Centra el texto del título */
-    width: 100%; /* Asegura que ocupe todo el ancho */
+    color: #333; 
+    margin-top: 25px; 
+    margin-bottom: 15px; 
+    text-align: center; 
+    width: 100%; 
 }
 
-/* Estilos para que la lista de servicios se muestre horizontalmente */
+
 #servicios-hotel {
-    list-style: none; /* Elimina los puntos o viñetas de la lista */
-    padding: 0; /* Elimina el padding por defecto de las listas */
-    margin: 0; /* Elimina el margen por defecto de las listas */
-    display: flex; /* Convierte el <ul> en un contenedor flexbox para sus ítems */
-    flex-wrap: wrap; /* Permite que los elementos salten a la siguiente línea si no caben */
-    justify-content: center; /* Centra los elementos de la lista horizontalmente */
-    gap: 15px; /* Espacio entre los elementos de la lista (servicios) */
-    width: 100%; /* Asegura que la lista ocupe todo el ancho disponible */
-    margin-top: 10px; /* Agrega un pequeño margen superior para separarlo del h3 */
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 15px; 
+    width: 100%; 
+    margin-top: 10px; 
 }
 
-/* Estilos para cada elemento (servicio) de la lista de servicios */
+
 #servicios-hotel li {
-    background-color: #f8f8f8; /* Color de fondo para cada servicio */
-    border: 1px solid #ddd; /* Borde sutil */
-    padding: 8px 15px; /* Espaciado interno para el texto del servicio */
-    border-radius: 20px; /* Bordes muy redondeados para un aspecto de "pastilla" */
-    font-size: 0.95em; /* Tamaño de fuente ligeramente más pequeño */
-    color: #444; /* Color de texto gris oscuro */
-    white-space: nowrap; /* Evita que el texto de un servicio se rompa en varias líneas */
+    background-color: #f8f8f8; 
+    border: 1px solid #ddd; 
+    padding: 8px 15px; 
+    border-radius: 20px; 
+    font-size: 0.95em; 
+    color: #444; 
+    white-space: nowrap; 
 }
 
-/* Estilos para la sección de reseñas */
+
 #reseñas {
-    width: 100%; /* Asegura que ocupe todo el ancho */
+    width: 100%; 
 }
 
-/* Estilos para los párrafos dentro de la sección de reseñas */
+
 #reseñas p {
-    margin-bottom: 5px; /* Margen inferior */
-    text-align: center; /* Centra el texto de los párrafos */
+    margin-bottom: 5px; 
+    text-align: center; 
 }
 
-/* Estilos para texto en negrita dentro de la sección de reseñas (e.g., nombres de usuario) */
+
 #reseñas strong {
-    color: #005f73; /* Color de texto primario */
+    color: #005f73; 
 }
 
-/* Estilos para el nuevo botón de reserva (el que antes era #btn-reservar) */
+
 .btn-reservar-estilizado {
-    display: block; /* Ocupa su propia línea */
-    width: fit-content; /* El ancho se ajusta al contenido */
-    margin: 30px auto 0 auto; /* Margen superior, centrado horizontalmente */
-    padding: 12px 25px; /* Espaciado interno */
-    background-color: #0a9396; /* Color de fondo primario (azul verdoso) */
-    color: white; /* Color de texto blanco */
-    border: none; /* Sin borde */
-    border-radius: 25px; /* Bordes muy redondeados */
-    font-size: 1.1em; /* Tamaño de fuente ligeramente más grande */
-    font-weight: bold; /* Texto en negrita */
-    text-decoration: none; /* Asegura que sea un enlace estéticamente como botón */
-    text-align: center; /* Centra el texto dentro del botón */
-    cursor: pointer; /* Cambia el cursor al pasar el ratón */
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transiciones suaves para interactividad */
-    box-shadow: 0 4px 10px rgba(10, 147, 150, 0.3); /* Sombra suave para darle profundidad */
+    display: block; 
+    width: fit-content; 
+    margin: 30px auto 0 auto; 
+    padding: 12px 25px; 
+    background-color: #0a9396; 
+    color: white; 
+    border: none; 
+    border-radius: 25px; 
+    font-size: 1.1em; 
+    font-weight: bold; 
+    text-decoration: none; 
+    text-align: center; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 4px 10px rgba(10, 147, 150, 0.3); 
 }
 
-/* Efecto hover para el botón de reserva estilizado */
+
 .btn-reservar-estilizado:hover {
-    background-color: #00707b; /* Un tono más oscuro al pasar el ratón */
-    transform: translateY(-2px); /* Pequeño levantamiento para efecto visual */
-    box-shadow: 0 6px 15px rgba(10, 147, 150, 0.4); /* Sombra más pronunciada al pasar el ratón */
+    background-color: #00707b; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 15px rgba(10, 147, 150, 0.4); 
 }
 
-/* --- Nuevos estilos para las habitaciones en rooms.html --- */
 
-/* Estilos para las tarjetas de habitación individuales */
+
+
 .habitacion-card {
-    background-color: white; /* Fondo blanco */
-    border-radius: 12px; /* Bordes redondeados */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Sombra suave */
-    overflow: hidden; /* Oculta cualquier contenido que se desborde */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para hover */
-    display: flex; /* Utiliza flexbox para la distribución interna de la tarjeta */
-    flex-direction: column; /* Organiza los elementos de la tarjeta en columna (imagen, info, botón) */
+    background-color: white; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    overflow: hidden; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    display: flex; 
+    flex-direction: column; 
 }
 
-/* Efecto hover para las tarjetas de habitación */
+
 .habitacion-card:hover {
-    transform: translateY(-8px); /* Efecto de levantamiento */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Sombra más pronunciada */
+    transform: translateY(-8px); 
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
 }
 
-/* Contenedor de la imagen de la habitación */
+
 .imagen-habitacion {
-    width: 100%; /* Ocupa todo el ancho de la tarjeta */
-    height: 200px; /* Altura fija para las imágenes de habitación */
-    overflow: hidden; /* Oculta partes de la imagen que se desbordan */
+    width: 100%; 
+    height: 200px; 
+    overflow: hidden; 
 }
 
-/* Estilos para la imagen dentro del contenedor de imagen de habitación */
+
 .imagen-habitacion img {
-    width: 100%; /* Asegura que la imagen ocupe todo el ancho */
-    height: 100%; /* Asegura que la imagen ocupe toda la altura */
-    object-fit: cover; /* Recorta la imagen para que cubra el área sin distorsionarse */
-    display: block; /* Elimina espacio extra */
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
 }
 
-/* Contenedor de información de la habitación */
+
 .info-habitacion {
-    padding: 20px; /* Espaciado interno */
-    display: flex; /* Utiliza flexbox para la distribución interna */
-    flex-direction: column; /* Elementos en columna */
-    flex-grow: 1; /* Permite que este contenedor crezca y ocupe el espacio disponible */
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    flex-grow: 1; 
 }
 
-/* Título de la habitación */
+
 .info-habitacion h3 {
-    font-size: 1.4em; /* Tamaño de fuente */
-    margin-bottom: 10px; /* Margen inferior */
-    color: #005f73; /* Color de texto primario */
-    text-align: left; /* Alinea el texto a la izquierda */
+    font-size: 1.4em; 
+    margin-bottom: 10px; 
+    color: #005f73; 
+    text-align: left; 
 }
 
-/* Párrafos de información de la habitación */
+
 .info-habitacion p {
-    font-size: 1em; /* Tamaño de fuente */
-    color: #555; /* Color de texto gris */
-    margin-bottom: 8px; /* Margen inferior */
+    font-size: 1em; 
+    color: #555; 
+    margin-bottom: 8px; 
 }
 
-/* Estilo para el botón de reservar de la habitación individual */
+
 .btn-reserva-habitacion {
-    background-color: #0a9396; /* Color de fondo (azul verdoso) */
-    color: white; /* Color de texto */
-    border: none; /* Sin borde */
-    border-radius: 8px; /* Bordes redondeados */
-    padding: 10px 15px; /* Espaciado interno */
-    font-size: 1em; /* Tamaño de fuente */
-    cursor: pointer; /* Cambia el cursor */
-    margin-top: auto; /* Empuja el botón hacia abajo si el contenedor es un flex column */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
-    font-weight: bold; /* Texto en negrita */
+    background-color: #0a9396; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    padding: 10px 15px; 
+    font-size: 1em; 
+    cursor: pointer; 
+    margin-top: auto; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    font-weight: bold; 
 }
 
-/* Efecto hover para el botón de reserva de habitación */
+
 .btn-reserva-habitacion:hover {
-    background-color: #00707b; /* Tono más oscuro al pasar el ratón */
-    transform: translateY(-2px); /* Pequeño levantamiento */
+    background-color: #00707b; 
+    transform: translateY(-2px); 
 }
 
 
-/* RESPONSIVE DESIGN */
-/* Media query para pantallas de hasta 1024px de ancho (tablets y móviles) */
+
+
 @media screen and (max-width: 1024px) {
-    /* Ajustes para el header general */
+    
     header {
-        flex-direction: column; /* Los elementos del header se apilan verticalmente */
-        text-align: center; /* Centra el texto */
-        padding: 15px; /* Reduce el padding */
+        flex-direction: column; 
+        text-align: center; 
+        padding: 15px; 
     }
 
-    /* Ajustes para el título del header */
+    
     header h1 {
-        margin-bottom: 15px; /* Margen inferior */
-        text-align: center; /* Centra el título */
-        padding-left: 0; /* Elimina padding horizontal */
-        padding-right: 0; /* Elimina padding horizontal */
+        margin-bottom: 15px; 
+        text-align: center; 
+        padding-left: 0; 
+        padding-right: 0; 
     }
 
-    /* Ajustes para la navegación del header */
+    
     header nav {
-        flex-direction: column; /* Los enlaces de navegación se apilan verticalmente */
-        gap: 10px; /* Reduce el espacio entre enlaces */
+        flex-direction: column; 
+        gap: 10px; 
     }
 
-    /* Ajustes para el header de hotel/rooms.html */
+    
     .hotel-header {
-        flex-direction: column; /* Los elementos se apilan verticalmente */
-        align-items: center; /* Centra los elementos */
-        justify-content: center; /* Centra los elementos */
-        padding: 15px; /* Reduce el padding */
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: center; 
+        padding: 15px; 
     }
 
-    /* Ajustes para el botón de regreso en el header de hotel/rooms.html */
+    
     .hotel-header .back-button {
-        position: static; /* Quita el posicionamiento absoluto para que fluya con el documento */
-        margin-bottom: 15px; /* Margen inferior para separarlo del título */
-        align-self: flex-start; /* Alinea el botón a la izquierda dentro de su contenedor flex */
-        top: auto; /* Restablece la propiedad top */
-        left: auto; /* Restablece la propiedad left */
+        position: static; 
+        margin-bottom: 15px; 
+        align-self: flex-start; 
+        top: auto; 
+        left: auto; 
     }
 
-    /* Asegura que el título del header de hotel/rooms siga centrado */
+    
     .hotel-header h1 {
         text-align: center;
         padding-left: 0;
         padding-right: 0;
     }
 
-    /* Ajustes para el contenedor del buscador */
+    
     #buscador .container {
-        flex-direction: column; /* Los elementos del buscador se apilan verticalmente */
-        padding: 15px; /* Reduce el padding */
+        flex-direction: column; 
+        padding: 15px; 
     }
 
-    /* Ajustes para inputs, selects y botones del buscador */
+    
     #buscador input,
     #buscador select,
     #buscador button {
-        width: 100%; /* Ocupan todo el ancho disponible */
-        max-width: 400px; /* Limita el ancho máximo en pantallas pequeñas */
+        width: 100%; 
+        max-width: 400px; 
     }
 
-    /* Ajustes para las cuadrículas de ofertas y habitaciones */
+    
     .grid-ofertas, .grid-habitaciones {
-        grid-template-columns: 1fr; /* Una sola columna en móviles */
-        padding: 10px; /* Reduce el padding */
+        grid-template-columns: 1fr; 
+        padding: 10px; 
     }
 
-    /* Ajustes para las tarjetas de hotel y habitación */
+    
     .hotel, .habitacion-card {
-        width: 100%; /* Ocupan todo el ancho disponible */
-        max-width: 400px; /* Limita el ancho de las tarjetas */
-        margin: 0 auto; /* Centra las tarjetas */
+        width: 100%; 
+        max-width: 400px; 
+        margin: 0 auto; 
     }
 
-    /* Ajustes para el detalle del hotel */
+    
     .detalle-hotel {
-        padding: 20px; /* Reduce el padding */
-        margin: 20px auto; /* Ajusta el margen */
+        padding: 20px; 
+        margin: 20px auto; 
     }
 
-    /* Ajustes para la imagen del hotel en detalle */
+    
     #imagen-hotel {
-        width: 95%; /* Reduce ligeramente el ancho para que no toque los bordes */
+        width: 95%; 
     }
 
-    /* Ajustes para las descripciones del hotel */
+    
     .descripcion-hotel, .descripcion-detallada {
-        padding: 0 5px; /* Reduce el padding horizontal */
-        font-size: 1em; /* Ajusta el tamaño de fuente */
+        padding: 0 5px; 
+        font-size: 1em; 
     }
 
-    /* Oculta las flechas del carrusel en pantallas pequeñas (se asume desplazamiento táctil) */
+    
     .flecha-carrusel {
         display: none;
     }
 
-    /* Ajusta la alineación del carrusel si las flechas están ocultas */
+    
     .carrusel {
-        justify-content: flex-start; /* Alinea los elementos al inicio */
-        padding: 0 10px 10px; /* Ajusta el padding */
+        justify-content: flex-start; 
+        padding: 0 10px 10px; 
     }
 }
 
 
-/* EASTER EGG STYLES */
-/* Animación de sacudida */
+
+
 @keyframes sacudir {
     0% { transform: rotate(0deg); }
     25% { transform: rotate(2deg); }
@@ -858,251 +858,251 @@ hr {
     100% { transform: rotate(0deg); }
 }
 
-/* Clase para aplicar la animación de sacudida */
+
 .sacudir {
     animation: sacudir 0.5s ease-in-out;
 }
 
-/* Estilos para el modo oscuro */
+
 .modo-oscuro {
-    background-color: #000 !important; /* Fondo negro */
-    color: #fff !important; /* Texto blanco */
+    background-color: #000 !important; 
+    color: #fff !important; 
 }
 
-/* Fondo de elementos específicos en modo oscuro */
+
 .modo-oscuro header,
 .modo-oscuro footer,
 .modo-oscuro #contacto {
-    background-color: #111 !important; /* Tonos de gris muy oscuro */
+    background-color: #111 !important; 
 }
 
-/* Color de enlaces en modo oscuro */
+
 .modo-oscuro a {
-    color: #0ff !important; /* Cian brillante para enlaces */
+    color: #0ff !important; 
 }
 
-/* Fondo de tarjetas, formularios y modal en modo oscuro */
+
 .modo-oscuro .hotel,
 .modo-oscuro .detalle-hotel,
 .modo-oscuro .form-container,
 .modo-oscuro .habitacion-card,
 .modo-oscuro .modal-content {
-    background-color: #1a1a1a !important; /* Fondo gris oscuro */
-    color: #fff !important; /* Texto blanco */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Sombra clara */
+    background-color: #1a1a1a !important; 
+    color: #fff !important; 
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); 
 }
 
-/* Estilos de inputs en modo oscuro */
+
 .modo-oscuro input {
-    background-color: #222 !important; /* Fondo más oscuro para inputs */
-    color: #fff !important; /* Texto blanco para inputs */
-    border-color: #444 !important; /* Borde gris oscuro para inputs */
+    background-color: #222 !important; 
+    color: #fff !important; 
+    border-color: #444 !important; 
 }
 
-/* Descripción detallada en modo oscuro */
+
 .modo-oscuro .descripcion-detallada {
-    background-color: #2a2a2a !important; /* Fondo más oscuro */
-    border-left-color: #0ff !important; /* Borde cian */
+    background-color: #2a2a2a !important; 
+    border-left-color: #0ff !important; 
 }
 
-/* Elementos de la lista de servicios en modo oscuro */
+
 .modo-oscuro #servicios-hotel li {
-    background-color: #2a2a2a !important; /* Fondo más oscuro */
-    border-color: #444 !important; /* Borde gris oscuro */
+    background-color: #2a2a2a !important; 
+    border-color: #444 !important; 
 }
 
-/* Mensajes de error en modo oscuro */
+
 .modo-oscuro .mensaje-error {
-    background-color: #4a0000 !important; /* Fondo rojo muy oscuro */
-    color: #ffaaaa !important; /* Texto rojo claro */
-    border-color: #880000 !important; /* Borde rojo oscuro */
+    background-color: #4a0000 !important; 
+    color: #ffaaaa !important; 
+    border-color: #880000 !important; 
 }
 
-/* Mensajes de información en modo oscuro */
+
 .modo-oscuro .mensaje-info {
-    background-color: #00303a !important; /* Fondo azul oscuro */
-    color: #a8dadc !important; /* Texto azul claro */
-    border-color: #005f73 !important; /* Borde azul */
+    background-color: #00303a !important; 
+    color: #a8dadc !important; 
+    border-color: #005f73 !important; 
 }
 
-/* Mensajes de error en modal en modo oscuro */
+
 .modo-oscuro .modal-message.mensaje-error {
     background-color: #4a0000 !important;
     color: #ffaaaa !important;
     border-color: #880000 !important;
 }
 
-/* Mensajes de información en modal en modo oscuro */
+
 .modo-oscuro .modal-message.mensaje-info {
     background-color: #00303a !important;
     color: #a8dadc !important;
     border-color: #005f73 !important;
 }
 
-/* Estilos para el cambio de cursor (Easter Egg) */
+
 .cambio-cursor {
-    /* Define un cursor personalizado con un archivo .ani (animado) y un .png (estático) de respaldo */
+    
     cursor: url(https://cur.cursors-4u.net/games/gam-10/oth959.ani),
             url(https://cur.cursors-4u.net/games/gam-10/oth959.png),
-            auto !important; /* 'auto' es el cursor por defecto si los anteriores no se cargan */
+            auto !important; 
 }
 
-/* --- Estilos para el Modal de Reserva --- */
-/* Contenedor principal del modal (pantalla de fondo) */
+
+
 .modal {
-    display: none; /* Oculto por defecto (se muestra con JS) */
-    position: fixed; /* Permanece en su lugar incluso al hacer scroll */
-    z-index: 1001; /* Z-index alto para que esté por encima de todo el contenido */
-    left: 0; /* Posición izquierda */
-    top: 0; /* Posición superior */
-    width: 100%; /* Ancho completo de la ventana */
-    height: 100%; /* Alto completo de la ventana */
-    overflow: auto; /* Habilitar scroll si el contenido es demasiado grande */
-    background-color: rgba(0,0,0,0.6); /* Fondo semi-transparente oscuro */
-    display: flex; /* Usar flexbox para centrar el contenido del modal */
-    align-items: center; /* Centrar verticalmente el contenido */
-    justify-content: center; /* Centrar horizontalmente el contenido */
+    display: none; 
+    position: fixed; 
+    z-index: 1001; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
 }
 
-/* Contenido interno del modal */
+
 .modal-content {
-    background-color: #fefefe; /* Fondo blanco casi puro */
-    margin: auto; /* Centrar automáticamente el contenido */
-    padding: 30px; /* Espaciado interno */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Sombra para dar profundidad */
-    width: 90%; /* Ancho adaptable */
-    max-width: 500px; /* Ancho máximo para el modal */
-    position: relative; /* Para posicionar el botón de cierre */
-    text-align: center; /* Centra el texto dentro del modal */
+    background-color: #fefefe; 
+    margin: auto; 
+    padding: 30px; 
+    border-radius: 10px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+    width: 90%; 
+    max-width: 500px; 
+    position: relative; 
+    text-align: center; 
 }
 
-/* Botón de cierre del modal */
+
 .close-button {
-    color: #aaa; /* Color gris claro */
-    position: absolute; /* Posicionamiento absoluto dentro del modal-content */
-    top: 15px; /* Distancia desde la parte superior */
-    right: 25px; /* Distancia desde la derecha */
-    font-size: 28px; /* Tamaño de fuente grande para el icono 'x' */
-    font-weight: bold; /* Texto en negrita */
-    cursor: pointer; /* Cambia el cursor */
-    transition: color 0.3s ease; /* Transición suave para el color */
+    color: #aaa; 
+    position: absolute; 
+    top: 15px; 
+    right: 25px; 
+    font-size: 28px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: color 0.3s ease; 
 }
 
-/* Efecto hover/focus para el botón de cierre */
+
 .close-button:hover,
 .close-button:focus {
-    color: #333; /* Color oscuro al pasar el ratón o enfocar */
-    text-decoration: none; /* Elimina el subrayado */
+    color: #333; 
+    text-decoration: none; 
 }
 
-/* Título dentro del modal */
+
 .modal-content h2 {
-    color: #005f73; /* Color de texto primario */
-    margin-bottom: 20px; /* Margen inferior */
-    font-size: 1.8em; /* Tamaño de fuente */
+    color: #005f73; 
+    margin-bottom: 20px; 
+    font-size: 1.8em; 
 }
 
-/* Párrafos dentro del modal */
+
 .modal-content p {
-    margin-bottom: 15px; /* Margen inferior */
-    font-size: 1.1em; /* Tamaño de fuente */
-    color: #555; /* Color de texto gris */
+    margin-bottom: 15px; 
+    font-size: 1.1em; 
+    color: #555; 
 }
 
-/* Etiquetas dentro del modal */
+
 .modal-content label {
-    display: block; /* Ocupa su propia línea */
-    text-align: left; /* Alinea el texto a la izquierda */
-    margin-bottom: 8px; /* Margen inferior */
-    font-weight: bold; /* Texto en negrita */
-    color: #333; /* Color de texto oscuro */
-    font-size: 1em; /* Tamaño de fuente */
+    display: block; 
+    text-align: left; 
+    margin-bottom: 8px; 
+    font-weight: bold; 
+    color: #333; 
+    font-size: 1em; 
 }
 
-/* Inputs de tipo fecha dentro del modal */
+
 .modal-content input[type="date"] {
-    width: calc(100% - 20px); /* Ancho completo menos el padding horizontal */
-    padding: 10px; /* Espaciado interno */
-    margin-bottom: 20px; /* Margen inferior */
-    border: 1px solid #ccc; /* Borde delgado */
-    border-radius: 5px; /* Bordes redondeados */
-    font-size: 1em; /* Tamaño de fuente */
-    box-sizing: border-box; /* Incluye padding y borde en el cálculo del ancho total */
+    width: calc(100% - 20px); 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 1em; 
+    box-sizing: border-box; 
 }
 
-/* Botón principal dentro del modal */
+
 .modal-content button {
-    background-color: #0a9396; /* Color de fondo (azul verdoso) */
-    color: white; /* Color de texto */
-    padding: 12px 25px; /* Espaciado interno */
-    border: none; /* Sin borde */
-    border-radius: 25px; /* Bordes muy redondeados */
-    font-size: 1.1em; /* Tamaño de fuente */
-    font-weight: bold; /* Texto en negrita */
-    cursor: pointer; /* Cambia el cursor */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
-    margin-top: 10px; /* Margen superior */
-    width: 100%; /* Ocupa todo el ancho disponible */
+    background-color: #0a9396; 
+    color: white; 
+    padding: 12px 25px; 
+    border: none; 
+    border-radius: 25px; 
+    font-size: 1.1em; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    margin-top: 10px; 
+    width: 100%; 
 }
 
-/* Efecto hover para el botón del modal */
+
 .modal-content button:hover {
-    background-color: #00707b; /* Tono más oscuro al pasar el ratón */
-    transform: translateY(-2px); /* Pequeño levantamiento */
+    background-color: #00707b; 
+    transform: translateY(-2px); 
 }
 
-/* Mensajes dentro del modal */
+
 .modal-message {
-    margin-top: 20px; /* Margen superior */
-    padding: 10px; /* Espaciado interno */
-    border-radius: 5px; /* Bordes redondeados */
-    font-weight: bold; /* Texto en negrita */
-    text-align: center; /* Centra el texto */
+    margin-top: 20px; 
+    padding: 10px; 
+    border-radius: 5px; 
+    font-weight: bold; 
+    text-align: center; 
 }
 
-/* Mensajes de error específicos del modal */
+
 .modal-message.mensaje-error {
-    color: #d62828; /* Color de texto rojo */
-    background-color: #ffe0e0; /* Fondo rojo claro */
-    border: 1px solid #d62828; /* Borde rojo */
+    color: #d62828; 
+    background-color: #ffe0e0; 
+    border: 1px solid #d62828; 
 }
 
-/* Mensajes de información específicos del modal */
+
 .modal-message.mensaje-info {
-    color: #005f73; /* Color de texto azul */
-    background-color: #e0f2f7; /* Fondo azul claro */
-    border: 1px solid #005f73; /* Borde azul */
+    color: #005f73; 
+    background-color: #e0f2f7; 
+    border: 1px solid #005f73; 
 }
 
-/* Responsive para el modal */
+
 @media screen and (max-width: 600px) {
-    /* Ajustes para el contenido del modal en pantallas pequeñas */
+    
     .modal-content {
-        padding: 20px; /* Reduce el padding */
-        width: 95%; /* Aumenta el ancho para ocupar más espacio */
+        padding: 20px; 
+        width: 95%; 
     }
-    /* Ajustes para el título del modal */
+    
     .modal-content h2 {
-        font-size: 1.5em; /* Reduce el tamaño de fuente */
+        font-size: 1.5em; 
     }
-    /* Ajustes para el botón de cierre del modal */
+    
     .close-button {
-        font-size: 24px; /* Reduce el tamaño de fuente */
-        top: 10px; /* Ajusta la posición */
-        right: 15px; /* Ajusta la posición */
+        font-size: 24px; 
+        top: 10px; 
+        right: 15px; 
     }
 }
 
-/* Estilos para el botón "Ver Reservas" (asumiendo que es un botón de navegación) */
+
 .btn-ver-reservas {
-    background-color: #0a9396; /* Color de fondo (azul verdoso) */
-    color: white; /* Color de texto */
-    padding: 10px 20px; /* Espaciado interno */
-    border-radius: 25px; /* Bordes muy redondeados */
-    text-decoration: none; /* Elimina el subrayado (si es un enlace) */
-    font-weight: bold; /* Texto en negrita */
-    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+    background-color: #0a9396; 
+    color: white; 
+    padding: 10px 20px; 
+    border-radius: 25px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: background-color 0.3s ease; 
 }
 
 .btn-ver-reservas:hover {
@@ -1132,7 +1132,7 @@ hr {
 }
 
 
-/* Botones para actualizar estado */
+
 .botones-estado {
     display: flex;
     flex-wrap: wrap;
@@ -1156,138 +1156,138 @@ hr {
     opacity: 0.9;
 }
 
-/* --- NUEVOS ESTILOS PARA LA SECCIÓN 'MIS RESERVAS' Y BOTONES --- */
 
-/* Ajustes para la tarjeta de reserva en mis_reservas.html */
-/* Estas propiedades ya existen en tu .hotel, pero aseguran flexbox para la estructura de la tarjeta de reserva */
+
+
+
 .hotel {
-    display: flex; /* Para organizar imagen y texto en columna */
+    display: flex; 
     flex-direction: column;
-    height: auto; /* Altura automática basada en el contenido */
-    overflow: hidden; /* Asegura que la imagen no se desborde si es más grande */
+    height: auto; 
+    overflow: hidden; 
 }
 
-/* Contenedor para la imagen de la reserva */
+
 .imagen-reserva {
-    width: 100%; /* Ocupa todo el ancho de la tarjeta */
-    height: 200px; /* Altura fija para uniformidad de las imágenes */
-    overflow: hidden; /* Esconde cualquier parte de la imagen que se desborde */
-    border-bottom: 1px solid #eee; /* Línea sutil para separar la imagen del texto */
+    width: 100%; 
+    height: 200px; 
+    overflow: hidden; 
+    border-bottom: 1px solid #eee; 
 }
 
-/* Estilos para la imagen dentro de la tarjeta de reserva */
+
 .imagen-reserva img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
-    display: block; /* Elimina el espacio extra que algunos navegadores añaden a las imágenes */
+    object-fit: cover; 
+    display: block; 
 }
 
-/* Contenedor para la información de la reserva (texto, precios, botones) */
+
 .info-reserva {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Permite que esta sección ocupe el espacio restante */
+    flex-grow: 1; 
 }
 
-/* Estilo para el precio total a pagar */
+
 .total-pago {
     font-weight: bold;
-    color: #d62828; /* Un color rojo distintivo para el total, puedes cambiarlo */
-    font-size: 1.2em; /* Un poco más grande para destacarse */
-    margin-top: 10px; /* Espacio superior para separarlo de otros párrafos */
+    color: #d62828; 
+    font-size: 1.2em; 
+    margin-top: 10px; 
 }
 
-/* Contenedor para los botones de acción (Confirmar, Cancelar, etc.) */
+
 .acciones-reserva {
-    margin-top: 15px; /* Espacio superior */
+    margin-top: 15px; 
     display: flex;
-    flex-wrap: wrap; /* Permite que los botones se envuelvan a la siguiente línea si no hay espacio */
-    gap: 10px; /* Espacio entre los botones */
-    justify-content: flex-start; /* Alinea los botones al inicio */
+    flex-wrap: wrap; 
+    gap: 10px; 
+    justify-content: flex-start; 
 }
 
-/* Estilos base para todos los botones de acción */
+
 .btn-accion {
     padding: 10px 18px;
-    border: none; /* Sin borde por defecto */
-    border-radius: 25px; /* Bordes muy redondeados para un aspecto moderno */
-    cursor: pointer; /* Indica que es clickeable */
+    border: none; 
+    border-radius: 25px; 
+    cursor: pointer; 
     font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; 
     text-align: center;
-    white-space: nowrap; /* Evita que el texto del botón se rompa en varias líneas */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera para un efecto de profundidad */
+    white-space: nowrap; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
-/* Efecto hover para todos los botones de acción */
+
 .btn-accion:hover {
-    transform: translateY(-2px); /* Ligeramente hacia arriba */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
-/* Colores específicos para cada tipo de botón */
+
 .btn-confirmar {
-    background-color: #28a745; /* Verde estándar (Bootstrap success) */
+    background-color: #28a745; 
     color: white;
 }
 .btn-confirmar:hover {
-    background-color: #218838; /* Verde un poco más oscuro al pasar el ratón */
+    background-color: #218838; 
 }
 
 .btn-cancelar {
-    background-color: #dc3545; /* Rojo estándar (Bootstrap danger) */
+    background-color: #dc3545; 
     color: white;
 }
 .btn-cancelar:hover {
-    background-color: #c82333; /* Rojo un poco más oscuro al pasar el ratón */
+    background-color: #c82333; 
 }
 
 .btn-completar {
-    background-color: #007bff; /* Azul estándar (Bootstrap primary) */
+    background-color: #007bff; 
     color: white;
 }
 .btn-completar:hover {
-    background-color: #0069d9; /* Azul un poco más oscuro al pasar el ratón */
+    background-color: #0069d9; 
 }
 
 .btn-eliminar {
-    background-color: #6c757d; /* Gris estándar (Bootstrap secondary) */
+    background-color: #6c757d; 
     color: white;
 }
 .btn-eliminar:hover {
-    background-color: #5a6268; /* Gris un poco más oscuro al pasar el ratón */
+    background-color: #5a6268; 
 }
 
-/* Ajustes a los estilos de estado existentes para mejor visualización */
-/* Estas clases ya las tienes, pero si quieres un color más claro y mejor contraste */
+
+
 .estado-reserva {
-    display: inline-block; /* Asegura que padding y border-radius se apliquen correctamente */
-    margin-left: 5px; /* Pequeño espacio a la izquierda de la etiqueta "Estado:" */
+    display: inline-block; 
+    margin-left: 5px; 
 }
 
 .estado-pendiente {
-    background-color: #fff3cd; /* Amarillo pastel */
-    color: #856404; /* Texto amarillo oscuro */
+    background-color: #fff3cd; 
+    color: #856404; 
 }
 
 .estado-confirmada {
-    background-color: #d4edda; /* Verde pastel */
-    color: #155724; /* Texto verde oscuro */
+    background-color: #d4edda; 
+    color: #155724; 
 }
 
 .estado-cancelada {
-    background-color: #f8d7da; /* Rojo pastel */
-    color: #721c24; /* Texto rojo oscuro */
+    background-color: #f8d7da; 
+    color: #721c24; 
 }
 
 .estado-completada {
-    background-color: #e2e6ea; /* Gris pastel */
-    color: #383d41; /* Texto gris oscuro */
+    background-color: #e2e6ea; 
+    color: #383d41; 
 }
 
-/* Mensajes de error o información, si los usas con la clase 'mensaje-error' */
+
 .mensaje-error {
     color: #dc3545;
     background-color: #f8d7da;
@@ -1298,15 +1298,15 @@ hr {
     text-align: center;
 }
 
-/* styles.CSS - Añadir o modificar */
 
-/* Estilos para el botón "Escribir Reseña" */
+
+
 .btn-escribir-reseña {
     display: block;
     width: fit-content;
-    margin: 20px auto 0 auto; /* Ajusta el margen según sea necesario */
+    margin: 20px auto 0 auto; 
     padding: 12px 25px;
-    background-color: #28a745; /* Un verde distintivo, puedes cambiarlo */
+    background-color: #28a745; 
     color: white;
     border: none;
     border-radius: 25px;
@@ -1320,12 +1320,12 @@ hr {
 }
 
 .btn-escribir-reseña:hover {
-    background-color: #218838; /* Verde un poco más oscuro al pasar el ratón */
+    background-color: #218838; 
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
 }
 
-/* Estilos para la sección de reseñas en hotel.html */
+
 #lista-reseñas {
     margin-top: 25px;
     border-top: 1px solid #eee;
@@ -1347,7 +1347,7 @@ hr {
 
 .reseña-item .calificacion {
     font-weight: bold;
-    color: #f39c12; /* Color para las estrellas/calificación */
+    color: #f39c12; 
     font-size: 1.1em;
 }
 
@@ -1358,7 +1358,7 @@ hr {
     margin-top: 10px;
 }
 
-/* Estilos para la calificación por estrellas dentro del modal */
+
 .calificacion-estrellas {
     display: flex;
     justify-content: center;
@@ -1367,31 +1367,31 @@ hr {
 }
 
 .calificacion-estrellas input[type="radio"] {
-    display: none; /* Oculta los radios originales */
+    display: none; 
 }
 
 .calificacion-estrellas label {
-    font-size: 2.5em; /* Tamaño de la estrella */
-    color: #ccc; /* Color por defecto de estrella vacía */
+    font-size: 2.5em; 
+    color: #ccc; 
     cursor: pointer;
     transition: color 0.2s ease;
-    padding: 0; /* Elimina padding que puedan tener otros labels */
-    margin: 0; /* Elimina margen que puedan tener otros labels */
+    padding: 0; 
+    margin: 0; 
 }
 
-/* Efecto hover y para estrellas seleccionadas */
+
 .calificacion-estrellas label:hover,
 .calificacion-estrellas label:hover ~ label,
 .calificacion-estrellas input[type="radio"]:checked ~ label {
-    color: #f39c12; /* Color de estrella llena/hover */
+    color: #f39c12; 
 }
 
-/* Asegura que la estrella clickeada y las anteriores se queden llenas */
+
 .calificacion-estrellas input[type="radio"]:checked + label {
     color: #f39c12;
 }
 
-/* Invertir el orden para que la selección funcione de derecha a izquierda (más intuitivo para estrellas) */
+
 .calificacion-estrellas {
     flex-direction: row-reverse;
 }
@@ -1400,10 +1400,10 @@ hr {
     transform: scale(1.1);
 }
 .calificacion-estrellas label:hover ~ label {
-    transform: scale(1.0); /* Asegura que las anteriores no escalen */
+    transform: scale(1.0); 
 }
 
-/* Modo oscuro para reseñas */
+
 .modo-oscuro .reseña-item {
     background-color: #2a2a2a !important;
     box-shadow: 0 2px 5px rgba(255,255,255,0.05);
@@ -1415,76 +1415,76 @@ hr {
 }
 
 .modo-oscuro .calificacion-estrellas label {
-    color: #555 !important; /* Estrellas vacías en modo oscuro */
+    color: #555 !important; 
 }
 .modo-oscuro .calificacion-estrellas label:hover,
 .modo-oscuro .calificacion-estrellas label:hover ~ label,
 .modo-oscuro .calificacion-estrellas input[type="radio"]:checked ~ label {
     color: #ffcc00 !important;
 }
-/* --------- HEADER GENERAL (PARA index.html, ofertas.html, rooms.html, mis_reservas.html) --------- */
+
 header {
-    background-color: #005f73; /* Fondo del header */
+    background-color: #005f73; 
     color: white;
     padding: 20px;
     display: flex;
-    justify-content: space-between; /* Para que el h1 y nav se separen */
+    justify-content: space-between; 
     align-items: center;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    flex-wrap: wrap; 
     min-height: 80px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 header h1 {
     margin: 0;
     font-size: 2em;
-    flex-shrink: 0; /* Evita que el título se encoja */
+    flex-shrink: 0; 
 }
 
-/* Estilos de la barra de navegación (nav) */
+
 nav {
     display: flex;
     align-items: center;
-    /* justify-content: flex-end; /* Esta línea es opcional, si el header ya tiene space-between */
+    
     flex-wrap: wrap;
-    gap: 10px; /* Espacio uniforme entre los botones de navegación */
-    margin-left: auto; /* Empuja el nav hacia la derecha si el h1 está a la izquierda */
+    gap: 10px; 
+    margin-left: auto; 
 }
 
-/* Estilos para los enlaces/botones de navegación */
+
 .nav-button {
-    display: inline-block; /* Para que padding y margin funcionen como en un bloque */
-    padding: 10px 15px; /* Relleno alrededor del texto */
-    /* margin: 0 5px;  Ya no es tan necesario si usas 'gap' en 'nav' */
-    background-color: #007bff; /* Color de fondo azul, AJUSTA ESTE COLOR para que coincida con tus otros botones */
-    color: white; /* Color del texto */
-    text-decoration: none; /* Quita el subrayado del enlace */
-    border-radius: 5px; /* Esquinas ligeramente redondeadas */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transición suave al pasar el ratón */
-    font-weight: 600; /* Negrita */
-    border: none; /* Sin borde */
-    cursor: pointer; /* Cursor de puntero */
-    text-align: center; /* Centrar texto */
-    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para el botón */
+    display: inline-block; 
+    padding: 10px 15px; 
+    
+    background-color: #007bff; 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    font-weight: 600; 
+    border: none; 
+    cursor: pointer; 
+    text-align: center; 
+    white-space: nowrap; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
 .nav-button:hover {
-    background-color: #0056b3; /* Color de fondo más oscuro al pasar el ratón, AJUSTA ESTE COLOR */
-    transform: translateY(-1px); /* Ligero efecto de elevación al pasar el ratón */
+    background-color: #0056b3; 
+    transform: translateY(-1px); 
 }
 
 .nav-button:active {
-    transform: translateY(0); /* Vuelve a la posición normal al hacer clic */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Sombra más pequeña al hacer clic */
+    transform: translateY(0); 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); 
 }
 
 
-/* --- Estilos para los botones de autenticación (Login/Logout) --- */
+
 .login-btn, .logout-btn {
     display: inline-block;
     padding: 10px 15px;
-    background-color: #be1f1f; /* Ejemplo: Verde para Iniciar Sesión, AJUSTA ESTE COLOR */
+    background-color: #be1f1f; 
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -1498,7 +1498,7 @@ nav {
 }
 
 .login-btn:hover, .logout-btn:hover {
-    background-color: #931c1c; /* Ejemplo: Verde más oscuro, AJUSTA ESTE COLOR */
+    background-color: #931c1c; 
     transform: translateY(-1px);
 }
 
@@ -1507,28 +1507,28 @@ nav {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenedor de los botones de autenticación (nombre de usuario, login/logout) */
+
 #auth-controls {
     display: flex;
     align-items: center;
-    gap: 10px; /* Espacio entre los elementos dentro de auth-controls */
-    /* margin-left: auto; */ /* Esto ya lo maneja la nav con justify-content y su propio gap */
+    gap: 10px; 
+     
 }
 
 #auth-controls .username {
     color: white;
     font-weight: 600;
     margin-right: 10px;
-    white-space: nowrap; /* Evita que el nombre de usuario se rompa */
+    white-space: nowrap; 
 }
 
-/* Estilos para el botón de "Volver" en hotel.html y rooms.html si lo deseas como botón */
+
 .back-button {
-    display: inline-flex; /* Usar flex para alinear el icono y el texto */
+    display: inline-flex; 
     align-items: center;
-    gap: 5px; /* Espacio entre la flecha y el texto */
+    gap: 5px; 
     padding: 10px 15px;
-    background-color: #6c757d; /* Gris para "Volver" */
+    background-color: #6c757d; 
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -1540,7 +1540,7 @@ nav {
 }
 
 .back-button:hover {
-    background-color: #5a6268; /* Gris más oscuro */
+    background-color: #5a6268; 
     transform: translateY(-1px);
 }
 
@@ -1550,36 +1550,36 @@ nav {
 }
 
 .arrow-left {
-    font-size: 1.2em; /* Tamaño de la flecha */
-    line-height: 1; /* Asegura que la flecha se alinee bien */
-    margin-right: 3px; /* Pequeño ajuste para la flecha */
+    font-size: 1.2em; 
+    line-height: 1; 
+    margin-right: 3px; 
 }
 
-/* --- Media Queries para responsividad  --- */
+
 @media (max-width: 768px) {
     header {
-        flex-direction: column; /* Apila el título y la navegación en pantallas pequeñas */
-        align-items: flex-start; /* Alinea los elementos a la izquierda */
+        flex-direction: column; 
+        align-items: flex-start; 
         padding: 15px;
     }
 
     nav {
-        width: 100%; /* La barra de navegación ocupa todo el ancho */
-        justify-content: center; /* Centra los botones de navegación */
-        margin-top: 15px; /* Espacio entre el título y la navegación */
-        margin-left: 0; /* Reinicia el margen izquierdo */
+        width: 100%; 
+        justify-content: center; 
+        margin-top: 15px; 
+        margin-left: 0; 
     }
 
     #auth-controls {
         width: 100%;
-        justify-content: center; /* Centra los botones de autenticación */
+        justify-content: center; 
         margin-top: 10px;
     }
 
     .nav-button, .login-btn, .logout-btn {
-        width: auto; /* O ajusta a un ancho fijo si prefieres */
-        flex-grow: 1; /* Permite que los botones crezcan y llenen el espacio disponible */
+        width: auto; 
+        flex-grow: 1; 
         text-align: center;
-        margin: 5px; /* Espacio uniforme entre botones cuando se envuelven */
+        margin: 5px; 
     }
 }
