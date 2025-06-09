@@ -1,191 +1,212 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Habitaciones Disponibles</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Habitaciones Disponibles</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header class="hotel-header">
-    <a href="javascript:history.back()" class="back-button"><i class="arrow-left">←</i> Volver</a>
-    <h1>Habitaciones Disponibles</h1>
-  </header>
+    <header class="hotel-header">
+        <a href="javascript:history.back()" class="back-button"><i class="arrow-left">←</i> Volver</a>
+        <h1>Habitaciones Disponibles</h1>
+    </header>
 
-  <main class="contenedor">
-    <section id="lista-habitaciones" class="grid-habitaciones">
-      <p class="mensaje-info">Cargando habitaciones...</p>
-    </section>
-  </main>
+    <main class="contenedor">
+        <section id="lista-habitaciones" class="grid-habitaciones">
+            <p class="mensaje-info">Cargando habitaciones...</p>
+        </section>
+    </main>
 
-  <div id="reservationModal" class="modal" style="display: none;">
-    <div class="modal-content">
-      <span class="close-button">&times;</span>
-      <h2>Reservar Habitación</h2>
-      <p>Estás reservando la habitación: <strong id="modalRoomInfo"></strong></p>
-      <label for="startDate">Fecha de Inicio:</label>
-      <input type="date" id="startDate" required>
-      <label for="endDate">Fecha de Fin:</label>
-      <input type="date" id="endDate" required>
-      <button id="confirmReservationBtn">Confirmar Reserva</button>
-      <p id="reservationMessage" class="modal-message"></p>
+    <div id="reservationModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Reservar Habitación</h2>
+            <p>Estás reservando la habitación: <strong id="modalRoomInfo"></strong></p>
+            <label for="startDate">Fecha de Inicio:</label>
+            <input type="date" id="startDate" required>
+            <label for="endDate">Fecha de Fin:</label>
+            <input type="date" id="endDate" required>
+            <button id="confirmReservationBtn">Confirmar Reserva</button>
+            <p id="reservationMessage" class="modal-message"></p>
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <p>&copy; 2025 Hoteles la Residencia del Bien. Todos los derechos reservados.</p>
-  </footer>
+    <footer>
+        <p>&copy; 2025 Hoteles la Residencia del Bien. Todos los derechos reservados.</p>
+    </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const hotelId = urlParams.get("id_hotel");
-      const listaHabitacionesDiv = document.getElementById('lista-habitaciones');
-      const reservationModal = document.getElementById('reservationModal');
-      const closeButton = document.querySelector('.close-button');
-      const modalRoomInfo = document.getElementById('modalRoomInfo');
-      const startDateInput = document.getElementById('startDate');
-      const endDateInput = document.getElementById('endDate');
-      const confirmReservationBtn = document.getElementById('confirmReservationBtn');
-      const reservationMessage = document.getElementById('reservationMessage');
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obtiene el ID del hotel de los parámetros de la URL.
+            const urlParams = new URLSearchParams(window.location.search);
+            const hotelId = urlParams.get("id_hotel");
+            
+            // Referencias a elementos del DOM.
+            const listaHabitacionesDiv = document.getElementById('lista-habitaciones');
+            const reservationModal = document.getElementById('reservationModal');
+            const closeButton = document.querySelector('.close-button');
+            const modalRoomInfo = document.getElementById('modalRoomInfo');
+            const startDateInput = document.getElementById('startDate');
+            const endDateInput = document.getElementById('endDate');
+            const confirmReservationBtn = document.getElementById('confirmReservationBtn');
+            const reservationMessage = document.getElementById('reservationMessage');
 
-      let currentHabitacionId = null;
+            let currentHabitacionId = null; // Variable para almacenar el ID de la habitación seleccionada.
 
-      closeButton.addEventListener('click', () => {
-        reservationModal.style.display = 'none';
-        reservationMessage.textContent = '';
-      });
+            // Event listener para cerrar el modal al hacer clic en el botón de cerrar.
+            closeButton.addEventListener('click', () => {
+                reservationModal.style.display = 'none';
+                reservationMessage.textContent = ''; // Limpia el mensaje de reserva.
+            });
 
-      window.addEventListener('click', (e) => {
-        if (e.target === reservationModal) {
-          reservationModal.style.display = 'none';
-          reservationMessage.textContent = '';
-        }
-      });
+            // Event listener para cerrar el modal al hacer clic fuera de su contenido.
+            window.addEventListener('click', (e) => {
+                if (e.target === reservationModal) {
+                    reservationModal.style.display = 'none';
+                    reservationMessage.textContent = ''; // Limpia el mensaje de reserva.
+                }
+            });
 
-      if (!hotelId) {
-        listaHabitacionesDiv.innerHTML = '<p class="mensaje-error">No se especificó el ID del hotel.</p>';
-        return;
-      }
+            // Si no se proporciona un ID de hotel en la URL, muestra un error.
+            if (!hotelId) {
+                listaHabitacionesDiv.innerHTML = '<p class="mensaje-error">No se especificó el ID del hotel.</p>';
+                return; // Termina la ejecución si no hay hotelId.
+            }
 
-      fetch('https://hotelesresidenciadelbien.alwaysdata.net/get_rooms.php?id_hotel=' + hotelId)
-        .then(res => res.json())
-        .then(habitaciones => {
-          if (!Array.isArray(habitaciones) || habitaciones.length === 0) {
-            listaHabitacionesDiv.innerHTML = '<p class="mensaje-info">No hay habitaciones disponibles.</p>';
-            return;
-          }
+            // Realiza una solicitud para obtener las habitaciones del hotel especificado.
+            fetch('https://hotelesresidenciadelbien.alwaysdata.net/get_rooms.php?id_hotel=' + hotelId)
+                .then(res => res.json())
+                .then(habitaciones => {
+                    // Muestra un mensaje si no hay habitaciones disponibles.
+                    if (!Array.isArray(habitaciones) || habitaciones.length === 0) {
+                        listaHabitacionesDiv.innerHTML = '<p class="mensaje-info">No hay habitaciones disponibles.</p>';
+                        return;
+                    }
 
-          listaHabitacionesDiv.innerHTML = '';
-          habitaciones.forEach(habitacion => {
-            const div = document.createElement('div');
-            div.classList.add('habitacion-card');
-            div.innerHTML = `
-              <div class="imagen-habitacion">
-                <img src="${habitacion.imagen_url}" alt="Imagen de la habitación ${habitacion.numero}">
-              </div>
-              <div class="info-habitacion">
-                <h3>Habitación ${habitacion.numero} - ${habitacion.tipo}</h3>
-                <p><strong>Precio:</strong> $${parseFloat(habitacion.precio).toFixed(2)} USD por noche</p>
-                <button class="btn-reserva-habitacion"
-                  data-habitacion-id="${habitacion.id_habitacion}"
-                  data-precio="${habitacion.precio}"
-                  data-tipo="${habitacion.tipo}"
-                  data-numero="${habitacion.numero}">Reservar Ahora</button>
-              </div>
-            `;
-            listaHabitacionesDiv.appendChild(div);
-          });
+                    listaHabitacionesDiv.innerHTML = ''; // Limpia el mensaje de carga.
+                    // Itera sobre cada habitación y crea una tarjeta para mostrarla.
+                    habitaciones.forEach(habitacion => {
+                        const div = document.createElement('div');
+                        div.classList.add('habitacion-card'); // Clase para el estilo de la tarjeta de habitación.
+                        div.innerHTML = `
+                            <div class="imagen-habitacion">
+                                <img src="${habitacion.imagen_url}" alt="Imagen de la habitación ${habitacion.numero}">
+                            </div>
+                            <div class="info-habitacion">
+                                <h3>Habitación ${habitacion.numero} - ${habitacion.tipo}</h3>
+                                <p><strong>Precio:</strong> $${parseFloat(habitacion.precio).toFixed(2)} USD por noche</p>
+                                <button class="btn-reserva-habitacion"
+                                    data-habitacion-id="${habitacion.id_habitacion}"
+                                    data-precio="${habitacion.precio}"
+                                    data-tipo="${habitacion.tipo}"
+                                    data-numero="${habitacion.numero}">Reservar Ahora</button>
+                            </div>
+                        `;
+                        listaHabitacionesDiv.appendChild(div);
+                    });
 
-          document.querySelectorAll('.btn-reserva-habitacion').forEach(button => {
-            button.addEventListener('click', function () {
-              fetch("ver_sesion.php")
-                .then(response => response.json())
-                .then(data => {
-                  if (!data.autenticado) {
-                    alert("Debes iniciar sesión para reservar.");
-                    window.location.href = "login.php";
+                    // Agrega event listeners a todos los botones de "Reservar Ahora".
+                    document.querySelectorAll('.btn-reserva-habitacion').forEach(button => {
+                        button.addEventListener('click', function () {
+                            // Antes de abrir el modal, verifica si el usuario está autenticado.
+                            fetch("ver_sesion.php")
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (!data.autenticado) {
+                                        alert("Debes iniciar sesión para reservar.");
+                                        window.location.href = "login.php"; // Redirige al login si no está autenticado.
+                                        return;
+                                    }
+
+                                    // Almacena el ID de la habitación y actualiza la información del modal.
+                                    currentHabitacionId = this.dataset.habitacionId;
+                                    const tipo = this.dataset.tipo;
+                                    const numero = this.dataset.numero;
+                                    const precio = this.dataset.precio;
+
+                                    modalRoomInfo.textContent = `Número ${numero} - ${tipo} ($${parseFloat(precio).toFixed(2)} USD/noche)`;
+                                    // Reinicia los campos de fecha y establece la fecha mínima de inicio a hoy.
+                                    startDateInput.value = '';
+                                    endDateInput.value = '';
+                                    startDateInput.min = new Date().toISOString().split('T')[0];
+                                    endDateInput.min = ''; // Limpia la fecha mínima de fin inicialmente.
+                                    reservationMessage.textContent = ''; // Limpia mensajes anteriores.
+                                    reservationModal.style.display = 'block'; // Muestra el modal.
+                                });
+                        });
+                    });
+                })
+                .catch(err => {
+                    // Manejo de errores en caso de que falle la carga de habitaciones.
+                    console.error('Error al cargar habitaciones:', err);
+                    listaHabitacionesDiv.innerHTML = '<p class="mensaje-error">No se pudieron cargar las habitaciones.</p>';
+                });
+
+            // Establece la fecha mínima de fin en función de la fecha de inicio seleccionada.
+            startDateInput.addEventListener('input', () => {
+                if (startDateInput.value) {
+                    const minEndDate = new Date(startDateInput.value);
+                    minEndDate.setDate(minEndDate.getDate() + 1); // La fecha de fin debe ser al menos un día después de la fecha de inicio.
+                    endDateInput.min = minEndDate.toISOString().split('T')[0];
+                }
+            });
+
+            // Maneja el evento de clic del botón "Confirmar Reserva".
+            confirmReservationBtn.addEventListener('click', () => {
+                const startDate = startDateInput.value;
+                const endDate = endDateInput.value;
+
+                // Validaciones básicas de los campos del formulario de reserva.
+                if (!currentHabitacionId || !startDate || !endDate) {
+                    reservationMessage.textContent = 'Completa todos los campos.';
+                    reservationMessage.className = 'modal-message mensaje-error';
                     return;
-                  }
+                }
 
-                  currentHabitacionId = this.dataset.habitacionId;
-                  const tipo = this.dataset.tipo;
-                  const numero = this.dataset.numero;
-                  const precio = this.dataset.precio;
+                if (new Date(startDate) >= new Date(endDate)) {
+                    reservationMessage.textContent = 'La fecha de fin debe ser posterior a la de inicio.';
+                    reservationMessage.className = 'modal-message mensaje-error';
+                    return;
+                }
 
-                  modalRoomInfo.textContent = `Número ${numero} - ${tipo} ($${parseFloat(precio).toFixed(2)} USD/noche)`;
-                  startDateInput.value = '';
-                  endDateInput.value = '';
-                  startDateInput.min = new Date().toISOString().split('T')[0];
-                  endDateInput.min = '';
-                  reservationMessage.textContent = '';
-                  reservationModal.style.display = 'block';
+                reservationMessage.textContent = 'Procesando reserva...';
+                reservationMessage.className = 'modal-message mensaje-info';
+
+                // Envía la solicitud de reserva al servidor.
+                fetch('https://hotelesresidenciadelbien.alwaysdata.net/create_reservation.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        id_habitacion: currentHabitacionId,
+                        fecha_inicio: startDate,
+                        fecha_fin: endDate
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    // Maneja la respuesta del servidor.
+                    if (data.success) {
+                        reservationMessage.textContent = '¡Reserva realizada con éxito!';
+                        // Cierra el modal y limpia el mensaje después de un tiempo.
+                        setTimeout(() => {
+                            reservationModal.style.display = 'none';
+                            reservationMessage.textContent = '';
+                        }, 3000);
+                    } else {
+                        reservationMessage.textContent = data.message || 'No se pudo completar la reserva.';
+                        reservationMessage.className = 'modal-message mensaje-error';
+                    }
+                })
+                .catch(error => {
+                    // Manejo de errores de red o del fetch.
+                    console.error('Error en reserva:', error);
+                    reservationMessage.textContent = 'Error al procesar la reserva.';
+                    reservationMessage.className = 'modal-message mensaje-error';
                 });
             });
-          });
-        })
-        .catch(err => {
-          console.error('Error al cargar habitaciones:', err);
-          listaHabitacionesDiv.innerHTML = '<p class="mensaje-error">No se pudieron cargar las habitaciones.</p>';
         });
-
-      startDateInput.addEventListener('input', () => {
-        if (startDateInput.value) {
-          const minEndDate = new Date(startDateInput.value);
-          minEndDate.setDate(minEndDate.getDate() + 1);
-          endDateInput.min = minEndDate.toISOString().split('T')[0];
-        }
-      });
-
-      confirmReservationBtn.addEventListener('click', () => {
-        const startDate = startDateInput.value;
-        const endDate = endDateInput.value;
-
-        if (!currentHabitacionId || !startDate || !endDate) {
-          reservationMessage.textContent = 'Completa todos los campos.';
-          reservationMessage.className = 'modal-message mensaje-error';
-          return;
-        }
-
-        if (new Date(startDate) >= new Date(endDate)) {
-          reservationMessage.textContent = 'La fecha de fin debe ser posterior a la de inicio.';
-          reservationMessage.className = 'modal-message mensaje-error';
-          return;
-        }
-
-        reservationMessage.textContent = 'Procesando reserva...';
-        reservationMessage.className = 'modal-message mensaje-info';
-
-        fetch('https://hotelesresidenciadelbien.alwaysdata.net/create_reservation.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            id_habitacion: currentHabitacionId,
-            fecha_inicio: startDate,
-            fecha_fin: endDate
-          })
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            reservationMessage.textContent = '¡Reserva realizada con éxito!';
-            setTimeout(() => {
-              reservationModal.style.display = 'none';
-              reservationMessage.textContent = '';
-            }, 3000);
-          } else {
-            reservationMessage.textContent = data.message || 'No se pudo completar la reserva.';
-            reservationMessage.className = 'modal-message mensaje-error';
-          }
-        })
-        .catch(error => {
-          console.error('Error en reserva:', error);
-          reservationMessage.textContent = 'Error al procesar la reserva.';
-          reservationMessage.className = 'modal-message mensaje-error';
-        });
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>

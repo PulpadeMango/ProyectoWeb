@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-// --- Conexión a la base de datos ---
+// Credenciales y conexión a la base de datos.
 $host = 'mysql-hotelesresidenciadelbien.alwaysdata.net';
 $user = '415850_donovan';
 $password = '19Mi77do21ri';
@@ -21,9 +21,10 @@ if ($conexion->connect_error) {
     exit();
 }
 
-// --- Obtener parámetros ---
+// Obtener ID del hotel y tabla (hoteles por defecto) de los parámetros GET.
 $id_hotel = $_GET['id'] ?? null;
 $tabla = $_GET['tabla'] ?? 'hoteles';
+// Validar que la tabla sea 'hoteles' o 'hoteles_del_mal' para evitar inyección SQL.
 $tabla = in_array($tabla, ['hoteles', 'hoteles_del_mal']) ? $tabla : 'hoteles';
 
 if (!$id_hotel) {
@@ -31,7 +32,7 @@ if (!$id_hotel) {
     exit();
 }
 
-// --- Consultar detalles del hotel ---
+// Consultar los detalles del hotel de la tabla especificada.
 $stmt_hotel = $conexion->prepare("SELECT id, nombre, imagen_url, descripcion, descripcion_detallada, servicios FROM $tabla WHERE id = ?");
 $stmt_hotel->bind_param("i", $id_hotel);
 $stmt_hotel->execute();
@@ -47,17 +48,18 @@ if ($result_hotel->num_rows === 0) {
 $hotel = $result_hotel->fetch_assoc();
 $stmt_hotel->close();
 
-// Ajustar los campos como espera el JS
+// Ajustar los nombres de los campos del hotel para consistencia con el frontend.
 $hotel['id_hotel'] = $hotel['id'];
 $hotel['descripcion_corta'] = $hotel['descripcion'];
 $hotel['servicios'] = $hotel['servicios'] ? explode(',', $hotel['servicios']) : [];
 
+// Eliminar campos originales que no se usarán directamente en la respuesta.
 unset($hotel['id']);
 unset($hotel['descripcion']);
 
 $reviews = [];
 
-// --- Consultar reseñas ---
+// Consultar las reseñas asociadas a este hotel, incluyendo el nombre del usuario.
 $stmt_reviews = $conexion->prepare("
     SELECT r.calificacion, r.comentario, r.fecha_reseña, u.nombre AS nombre_usuario
     FROM Reseña r
@@ -75,9 +77,10 @@ while ($row = $result_reviews->fetch_assoc()) {
 $stmt_reviews->close();
 $conexion->close();
 
-// --- Respuesta JSON ---
+// Devolver los detalles del hotel y sus reseñas en formato JSON.
 echo json_encode([
     "success" => true,
     "hotel" => $hotel,
     "reviews" => $reviews
 ]);
+?>

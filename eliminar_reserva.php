@@ -5,11 +5,12 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
+// Manejar solicitudes OPTIONS (preflight CORS).
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    exit(0); // CORS preflight
+    exit(0);
 }
 
-// Verificar si el usuario está autenticado
+// Asegurarse de que el usuario esté autenticado.
 if (!isset($_SESSION['id_usuario'])) {
     echo json_encode(["success" => false, "message" => "Debes iniciar sesión."]);
     exit;
@@ -17,16 +18,17 @@ if (!isset($_SESSION['id_usuario'])) {
 
 $id_usuario = $_SESSION['id_usuario'];
 
-// Leer datos del cuerpo JSON
+// Obtener el ID de la reserva del cuerpo JSON.
 $input = json_decode(file_get_contents("php://input"), true);
 $id_reserva = $input['id_reserva'] ?? null;
 
+// Validar que se proporcionó el ID de la reserva.
 if (!$id_reserva) {
     echo json_encode(["success" => false, "message" => "ID de reserva no proporcionado."]);
     exit;
 }
 
-// Conexión
+// Credenciales de la base de datos.
 $host = 'mysql-hotelesresidenciadelbien.alwaysdata.net';
 $user = '415850_donovan';
 $password = '19Mi77do21ri';
@@ -34,12 +36,13 @@ $database = 'hotelesresidenciadelbien_db';
 
 $conexion = new mysqli($host, $user, $password, $database);
 
+// Verificar la conexión a la base de datos.
 if ($conexion->connect_error) {
     echo json_encode(["success" => false, "message" => "Error de conexión: " . $conexion->connect_error]);
     exit;
 }
 
-// Eliminar solo si la reserva pertenece al usuario y está cancelada
+// Eliminar la reserva solo si pertenece al usuario actual y su estado es 'Cancelada'.
 $sql = "DELETE FROM Reserva WHERE id_reserva = ? AND id_usuario = ? AND estado = 'Cancelada'";
 $stmt = $conexion->prepare($sql);
 

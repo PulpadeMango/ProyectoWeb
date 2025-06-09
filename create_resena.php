@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-// Verificar sesión activa
+// Asegurarse de que el usuario esté autenticado antes de continuar.
 if (!isset($_SESSION['id_usuario'])) {
     echo json_encode(["success" => false, "message" => "Usuario no autenticado."]);
     exit();
@@ -17,7 +17,7 @@ if (!isset($_SESSION['id_usuario'])) {
 
 $id_usuario_sesion = $_SESSION['id_usuario'];
 
-// Datos de conexión
+// Parámetros de conexión a la base de datos.
 $host = 'mysql-hotelesresidenciadelbien.alwaysdata.net';
 $user = '415850_donovan';
 $password = '19Mi77do21ri';
@@ -25,52 +25,53 @@ $database = 'hotelesresidenciadelbien_db';
 
 $conexion = new mysqli($host, $user, $password, $database);
 if ($conexion->connect_error) {
-    echo json_encode(["success" => false, "message" => "Conexión fallida a la base de datos: " . $conexion->connect_error]); // Mensaje más específico
+    echo json_encode(["success" => false, "message" => "Conexión fallida a la base de datos: " . $conexion->connect_error]);
     exit();
 }
 
-// Leer datos POST
+// Decodificar la entrada JSON del cuerpo de la solicitud.
 $input = json_decode(file_get_contents("php://input"), true);
 $id_hotel = $input['id_hotel'] ?? null;
 $id_usuario_reseña = $input['id_usuario'] ?? null; 
 $calificacion = $input['calificacion'] ?? null;
 $comentario = $input['comentario'] ?? null;
 
-// Validaciones
-if (!$id_hotel || !$calificacion || $comentario === null) { // $comentario puede ser cadena vacía, pero debe existir
+// Validar que todos los campos obligatorios estén presentes.
+if (!$id_hotel || !$calificacion || $comentario === null) {
     echo json_encode(["success" => false, "message" => "Todos los campos (hotel, calificación, comentario) son obligatorios."]);
     $conexion->close();
     exit();
 }
 
-// Asegurar que id_hotel y calificacion son numéricos
+// Sanitizar y validar que las entradas numéricas sean válidas.
 if (!is_numeric($id_hotel) || !is_numeric($calificacion)) {
     echo json_encode(["success" => false, "message" => "ID de hotel y calificación deben ser números válidos."]);
     $conexion->close();
     exit();
 }
 
+// Verificación de seguridad: Asegurarse de que el usuario que envía la reseña coincide con el usuario autenticado en la sesión.
 if ($id_usuario_sesion != $id_usuario_reseña) {
     echo json_encode(["success" => false, "message" => "Error de seguridad: ID de usuario no coincide con la sesión."]);
     $conexion->close();
     exit();
 }
 
-// Validación de calificación en el servidor (aunque ya se valida en el cliente, esto es crucial por seguridad)
+// Validar que la calificación esté dentro del rango aceptable (1-5).
 if ($calificacion < 1 || $calificacion > 5) {
     echo json_encode(["success" => false, "message" => "La calificación debe ser un número entre 1 y 5."]);
     $conexion->close();
     exit();
 }
 
+// Validar la longitud del comentario.
 if (strlen($comentario) < 10 || strlen($comentario) > 500) { 
     echo json_encode(["success" => false, "message" => "El comentario debe tener entre 10 y 500 caracteres."]);
     $conexion->close();
     exit();
 }
 
-// --- VERIFICAR SI EL USUARIO TIENE UNA RESERVA COMPLETADA PARA ESTE HOTEL ---
-// NECESARIO JOIN con Habitacion
+// Verificar si el usuario tiene una reserva completada para este hotel específico.
 $sql_check_reserva = "
     SELECT COUNT(R.id_reserva) AS total
     FROM Reserva R
@@ -98,8 +99,7 @@ if ($row_check_reserva['total'] === 0) {
     exit();
 }
 
-// --- VERIFICAR SI EL USUARIO YA HA DEJADO UNA RESEÑA PARA ESTE HOTEL ---
-// (Esta consulta SÍ es correcta porque la tabla Reseña tiene id_hotel directamente)
+// Comprobar si el usuario ya ha enviado una reseña para este hotel.
 $stmt_check_review = $conexion->prepare("SELECT COUNT(*) AS total FROM Reseña WHERE id_usuario = ? AND id_hotel = ?");
 if (!$stmt_check_review) {
     echo json_encode(["success" => false, "message" => "Error interno al preparar la verificación de reseña existente: " . $conexion->error]);
@@ -118,8 +118,7 @@ if ($row_check_review['total'] > 0) {
     exit();
 }
 
-
-// --- INSERTAR LA RESEÑA EN LA BASE DE DATOS ---
+// Insertar la nueva reseña en la base de datos.
 $stmt_insert = $conexion->prepare("INSERT INTO Reseña (id_hotel, id_usuario, calificacion, comentario, fecha_reseña) VALUES (?, ?, ?, ?, NOW())");
 if (!$stmt_insert) {
     echo json_encode(["success" => false, "message" => "Error interno al preparar la inserción de reseña: " . $conexion->error]);
@@ -131,7 +130,6 @@ $stmt_insert->bind_param("iiis", $id_hotel, $id_usuario_sesion, $calificacion, $
 if ($stmt_insert->execute()) {
     echo json_encode(["success" => true, "message" => "Reseña publicada con éxito."]);
 } else {
-    // Si hay un error en la ejecución, también devolverlo
     echo json_encode(["success" => false, "message" => "Error al publicar la reseña: " . $stmt_insert->error]);
 }
 

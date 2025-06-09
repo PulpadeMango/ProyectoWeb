@@ -1,72 +1,78 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Ofertas increíbles - Hoteles La Residencia del Bien</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Ofertas increíbles - Hoteles La Residencia del Bien</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
-    <h1>Ofertas increíbles</h1>
-    <nav>
+        <h1>Ofertas increíbles</h1>
+        <nav>
             <a href="index.html" class="nav-button">Inicio</a>
             <a href="ofertas.html" class="nav-button">Ofertas</a>
-            <a href="mis_reservas.html" class="nav-button">Mis Reservas</a> <div id="auth-controls">
-            <a href="login.php" class="login-btn">Iniciar sesión</a>
-        </div>
-    </nav>
-  </header>
+            <a href="mis_reservas.html" class="nav-button">Mis Reservas</a> 
+            <div id="auth-controls">
+                <a href="login.php" class="login-btn">Iniciar sesión</a>
+            </div>
+        </nav>
+    </header>
 
-  <main>
-    <section id="ofertas-lista">
-      <h2>Hoteles con precios especiales</h2>
-      <div id="lista-ofertas" class="grid-ofertas"></div>
-    </section>
-  </main>
+    <main>
+        <section id="ofertas-lista">
+            <h2>Hoteles con precios especiales</h2>
+            <div id="lista-ofertas" class="grid-ofertas"></div>
+        </section>
+    </main>
 
-  <footer>
-    <p>&copy; 2025 Hoteles la Residencia del Bien. Todos los derechos reservados.</p>
-  </footer>
+    <footer>
+        <p>&copy; 2025 Hoteles la Residencia del Bien. Todos los derechos reservados.</p>
+    </footer>
 
     <script src="script.js"></script>
-  <script>
-    fetch("https://hotelesresidenciadelbien.alwaysdata.net/get_data.php")
-      .then(res => res.json())
-      .then(hoteles => {
-        const contenedor = document.getElementById("lista-ofertas");
-        const ofertas = hoteles.filter(h => h.precio <= 100); 
+    <script>
+        // Al cargar el DOM, realiza una solicitud para obtener los datos de los hoteles.
+        fetch("https://hotelesresidenciadelbien.alwaysdata.net/get_data.php")
+            .then(res => res.json())
+            .then(hoteles => {
+                const contenedor = document.getElementById("lista-ofertas");
+                // Filtra los hoteles para mostrar solo aquellos con precio menor o igual a 100.
+                const ofertas = hoteles.filter(h => h.precio <= 100); 
 
-        if (ofertas.length === 0) {
-          contenedor.innerHTML = "<p>No hay ofertas disponibles en este momento.</p>";
-          return;
-        }
+                if (ofertas.length === 0) {
+                    contenedor.innerHTML = "<p>No hay ofertas disponibles en este momento.</p>";
+                    return;
+                }
 
-        ofertas.forEach(hotel => {
-          const div = document.createElement("div");
-          div.classList.add("hotel");
-          div.innerHTML = `
-            <a href="hotel.html?id=${hotel.id}" class="enlace-hotel">
-              <div class="imagen-hotel">
-                <img src="${hotel.imagen_url}" alt="Imagen de ${hotel.nombre}">
-              </div>
-              <h3>${hotel.nombre}</h3>
-              <p><strong>${hotel.ciudad}, ${hotel.pais}</strong></p>
-              <p><strong>Precio:</strong> $${hotel.precio} USD</p>
-              <p>${hotel.descripcion}</p>
-            </a>
-          `;
-          contenedor.appendChild(div);
-        });
-      })
-      .catch(err => {
-        document.getElementById("lista-ofertas").innerHTML = "<p>Error al cargar las ofertas.</p>";
-        console.error("Error:", err);
-      });
-    document.addEventListener("DOMContentLoaded", verificarSesionYActualizarUI);
-  </script>
+                // Itera sobre las ofertas y crea una tarjeta HTML para cada hotel.
+                ofertas.forEach(hotel => {
+                    const div = document.createElement("div");
+                    div.classList.add("hotel"); // Clase 'hotel' para los estilos.
+                    div.innerHTML = `
+                        <a href="hotel.html?id=${hotel.id}" class="enlace-hotel">
+                            <div class="imagen-hotel">
+                                <img src="${hotel.imagen_url}" alt="Imagen de ${hotel.nombre}">
+                            </div>
+                            <h3>${hotel.nombre}</h3>
+                            <p><strong>${hotel.ciudad}, ${hotel.pais}</strong></p>
+                            <p><strong>Precio:</strong> $${hotel.precio} USD</p>
+                            <p>${hotel.descripcion}</p>
+                        </a>
+                    `;
+                    contenedor.appendChild(div);
+                });
+            })
+            .catch(err => {
+                // Manejo de errores en caso de que la carga de ofertas falle.
+                document.getElementById("lista-ofertas").innerHTML = "<p>Error al cargar las ofertas.</p>";
+                console.error("Error:", err);
+            });
+        
+        // Ejecuta la función de verificación de sesión y actualización de UI cuando el DOM esté completamente cargado.
+        document.addEventListener("DOMContentLoaded", verificarSesionYActualizarUI);
+    </script>
 
 </body>
 </html>

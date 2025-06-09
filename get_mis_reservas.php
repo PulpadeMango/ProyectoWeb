@@ -9,17 +9,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
+// Credenciales de la base de datos.
 $host = 'mysql-hotelesresidenciadelbien.alwaysdata.net';
 $user = '415850_donovan';
 $password = '19Mi77do21ri';
 $database = 'hotelesresidenciadelbien_db';
 
 $conexion = new mysqli($host, $user, $password, $database);
+// Verificar la conexión a la base de datos.
 if ($conexion->connect_error) {
     echo json_encode(["success" => false, "message" => "Error de conexión: " . $conexion->connect_error]);
     exit();
 }
 
+// Asegurarse de que el usuario esté autenticado.
 if (!isset($_SESSION['id_usuario'])) {
     echo json_encode(["success" => false, "message" => "Usuario no autenticado."]);
     exit();
@@ -27,7 +30,7 @@ if (!isset($_SESSION['id_usuario'])) {
 
 $id_usuario = $_SESSION['id_usuario'];
 
-// Obtenemos todas las reservas del usuario, con JOINs para obtener más detalles
+// Consulta SQL para obtener todas las reservas del usuario, incluyendo detalles de la habitación y el hotel.
 $sql = "
 SELECT 
     r.id_reserva,
@@ -55,11 +58,14 @@ $stmt->execute();
 $resultado = $stmt->get_result();
 
 $reservas = [];
+// Recorrer los resultados y almacenarlos en un array.
 while ($fila = $resultado->fetch_assoc()) {
     $reservas[] = $fila;
 }
 
+// Devolver las reservas como JSON.
 echo json_encode($reservas);
 
 $stmt->close();
 $conexion->close();
+?>
